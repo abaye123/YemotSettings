@@ -74,3 +74,21 @@ header ul li a {
 header ul li a:hover {
     color: #333333;
 }
+
+
+/* Styles for the yellow ribbon */
+.ribbon {
+    position: fixed;
+    top: 250px;
+    left: -30pt;
+    width: 400px;
+    text-align: center;
+    font-size: 24pt;
+    background-color: yellow;
+    padding: 10px;
+    color: black;
+    font-weight: bold;
+    transform: rotate(-45deg); /* Rotate the ribbon by -45 degrees */
+    transform-origin: 0 0; /* Set the rotation origin to the top left corner */
+    z-index: 999; /* Ensure the ribbon is on top of other elements */
+  }
