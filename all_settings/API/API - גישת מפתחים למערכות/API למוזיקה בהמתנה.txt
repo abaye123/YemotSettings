@@ -1,0 +1,14 @@
+API למוזיקה בהמתנה
+טיפים עצות והדגמות מהמשתמשים   1  1  18
+  
+Liy  לפני יומיים
+יצירת מוזיקה בהמתנה
+
+https://www.call2all.co.il/ym/api/CreateMusicOnHolds?token=0773137770:1234&folderPath=ivr2:/1&name=test
+קבלת המוזיקה בהמתנה הקיימות לשלוחה
+
+https://www.call2all.co.il/ym/api/GetMusicOnHoldByPath?token=0773137770:1234&path=ivr2:/2
+מחיקת מוזיקה בהמתנה
+
+https://www.call2all.co.il/ym/api/DeleteMusicOnHolds?token=0773137770:1234&name=18063_test
+ 3 

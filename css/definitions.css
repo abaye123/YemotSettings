@@ -1,0 +1,22 @@
+textarea {
+    width: 30%;
+    height: 130px;
+    resize: none;
+    /* Prevent users from resizing the textarea */
+    overflow-y: scroll;
+    /* Add a vertical scrollbar when content exceeds the height */
+    text-align: left;
+}
+
+#exts input[id^="input_"] {
+    /* Your CSS styles here */
+    width: 40px;
+    height: 20px;
+    /* Example width */
+    /* Add any other styles as needed */
+}
+
+.auto-size-input {
+    width: auto;
+    box-sizing: border-box;
+}

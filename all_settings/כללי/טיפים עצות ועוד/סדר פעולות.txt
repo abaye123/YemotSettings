@@ -1,0 +1,38 @@
+סדר פעולות בכניסה לשלוחה לפני המעבר למודול עצמו
+אזור התעשיה - הגדרות המערכת   1  1  1.8k
+  
+Eeliyahu ניהול  לפני 12 חודשים
+להלן יפורטו סדר הפעולות של המערכת שנעשה בכל כניסה לשלוחה
+לאחר הפעולה/בדיקה הראשונה המערכת ממשיכה לפעולה/בדיקה השניה. במידה והבדיקה הראשונה חסמה את הכניסה לשלוחה לא יתבצעו הפעולות/בדיקות הנוספות כלל
+
+key	הסבר	מידע נוסף
+1	limit_call_seconds	הגבלת אורך שיחה כהטמעה בכל מודול	https://f2.freeivr.co.il/post/77
+2	mode_say_log	השמעת מיקום השלוחה בכניסה לשלוחה	https://f2.freeivr.co.il/post/1248
+3	enter_if_time	כניסה לשלוחה לפי זמנים	https://f2.freeivr.co.il/post/941
+4	enter_after_time	זמן פתיחת שלוחה	https://f2.freeivr.co.il/post/941
+5	password	סיסמה לשלוחה	https://f2.freeivr.co.il/post/948
+6	black_no_phone	חסימת מספרים ללא זיהוי	https://f2.freeivr.co.il/post/970
+7	check_phone_verify	אימות דו שלבי	https://f2.freeivr.co.il/post/969
+8	white_list	רשימה לבנה	https://f2.freeivr.co.il/post/972
+9	black_list	רשימה שחורה	https://f2.freeivr.co.il/post/1246
+10	enter_id	כניסה לפי מספר אישי	https://f2.freeivr.co.il/post/1250
+11	check_did_and_go_to_folder	הפנייה לפי מספר מחייג ו/או מחויג	https://f2.freeivr.co.il/post/60
+12	check_access_filter	אקסס פילטר	https://f2.freeivr.co.il/post/60901
+13	send_sms	שליחת מסרון (sms) בכניסה לשלוחה	https://f2.freeivr.co.il/post/2770
+14	send_tzintuk	שליחת צנתוק למחייג בכניסה לשלוחה	https://f2.freeivr.co.il/post/89969
+15	oref_check	השמעת אזעקות בזמן אמת	https://f2.freeivr.co.il/post/79323
+16	enter_foldar_end_time	זמן סגירת שלוחה	https://f2.freeivr.co.il/post/941
+17	check_phone_number	כניסה לשלוחה ע"פ מספר ישראלי/לא ישראלי	https://f2.freeivr.co.il/post/1247
+18	checking_units_ext	התראה על כמות נמוכה של יחידות או פג תוקף	https://f2.freeivr.co.il/post/18757
+19	go_to_from_tzintuk	פילטר לפי רשימת צינתוקים	https://f2.freeivr.co.il/post/41323
+20	20check_template_filter	פילטר לפי מספר רשימות תפוצה	https://f2.freeivr.co.il/post/124
+21	check_points_filter	פילטר לפי ניקוד	https://f2.freeivr.co.il/post/56097
+22	check_listening_ok	פילטר לפי האזנה לקובץ מסוים במערכת	https://f2.freeivr.co.il/post/92925
+23	check_api	בדיקת הרשאת כניסה ב-API	https://f2.freeivr.co.il/post/33763
+24	send_message_to_telegram	שליחת הודעה לטלגרם בכל כניסה לשלוחה	https://f2.freeivr.co.il/post/51968
+25	points_time	הוספת ניקוד בהתאם לזמן האזנה	https://f2.freeivr.co.il/post/48236
+26	send_dtmf	שליחת DTMF מוגדר מראש	https://f2.freeivr.co.il/post/78119
+27	play_campaign_message	השמעת הודעות קמפיין (מלבד מודול תפריט - menu)	https://f2.freeivr.co.il/post/62038
+28	limit_entries_folder_max	הגבלת כמות כניסות לשלוחה בצורה כללית	https://f2.freeivr.co.il/post/25739
+ 9 
+

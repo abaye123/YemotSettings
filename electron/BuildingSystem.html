@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="iw" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>אפיון ויצירת מערכת | אביי</title>
+
+    <link rel="stylesheet" type="text/css" href="css/body.css" />
+    <link rel="stylesheet" type="text/css" href="css/header.css" />
+    <link rel="stylesheet" type="text/css" href="css/sidebar.css" />
+    <link rel="stylesheet" type="text/css" href="css/footer.css" />
+
+    <link rel="stylesheet" type="text/css" href="css/definitions.css" />
+
+    <script src="js/header.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/footer.js"></script>
+
+    <script src="js/load.js"></script>
+    <script src="js/ext_data_processing.js"></script>
+    <script src="js/yemot.js"></script>
+
+    <script>
+        function init() {
+            myHeader();
+            myFooter();
+            mySidebar();
+        }
+    </script>
+    <style>
+
+    </style>
+</head>
+
+<body onload="init()">
+
+    <div id="myHeader"></div>
+    <div id="sidebar"></div>
+
+    <div id="content">
+        <div class="rounded-container">
+            <h2 id="title_ext">הגדרת מפת שלוחות</h2>
+            <p id="desc_ext">כאן נגדיר את הגדרות ותבניות השלוחות השונות במערכת המבוקשת</p>
+            <label>מספר המערכת:</label>
+            <input id="numberIvr" type="text">
+            <label>סיסמה:</label>
+            <input id="passwordIvr" type="text">
+            </br></br>
+            <label>הזן שלוחה ראשית</label>
+            <button id="bthy" onclick="adjustInputSize()">-</button>
+            <input id="extMain" type="text" placeholder="הזן את נתיב השלוחה...">
+            </br></br>
+            <div id="exts">
+                <div id="ext_1">
+                    <button id="bth_add_ext_1" onclick="createExtDef(this)">+</button>
+                    <button id="bth_del_ext_1" onclick="deleteExtDef(this)">-</button>
+                    <label id="num_ext_1">1.</label>
+                    <label>הזן את נתיב השלוחה להגדרה</label>
+                    <input id="input_1" class="input_exts" type="text" onchange="getListSettingsB(this)">
+                    <label>בחר את התבנית:</label>
+                    <select id="setting_1" name="option" onchange="getSettingExt(this)">
+                        <option value="select">בחר תבנית מהרשימה...</option>
+                    </select>
+                    <div id="div_ext_op_1" class="rtl-container"></div>
+                </div>
+            </div>
+
+            </br></br>
+            <button id="bth_updateExt" onclick="getDataFromDivs('bth_updateExt')">הגדר את השלוחות במערכת</button>
+            <button id="bth_saveExt" onclick="getDataFromDivs('bth_saveExt')">שמור כתבנית מערכת אישית</button>
+
+
+
+        </div>
+    </div>
+
+    <div id="myFooter"></div>
+
+    <script>
+        let extensionCounter = 2; // Initialize the counter for unique IDs
+
+        function createExtDef(element) {
+            const rowNumber = element.id.split('_')[3];
+            console.log('rowNumber:' + rowNumber)
+            // Create a new div with a unique ID
+            const newDiv = document.createElement('div');
+            newDiv.id = 'ext_' + extensionCounter;
+
+            // Clone the template div (ext_1) and append it to the new div
+            const templateDiv = document.getElementById('ext_' + rowNumber);
+            newDiv.innerHTML = templateDiv.innerHTML;
+
+            // Update the input and select IDs to ensure uniqueness
+            newDiv.querySelector('label').id = 'num_ext_' + extensionCounter;
+            newDiv.querySelector('label').innerHTML = extensionCounter + ".";
+            newDiv.querySelector('input').id = 'input_' + extensionCounter;
+            newDiv.querySelector('select').id = 'setting_' + extensionCounter;
+            newDiv.querySelector('div').id = 'div_ext_op_' + extensionCounter;
+            newDiv.querySelector('div').innerHTML = '';
+            newDiv.querySelector('button').id = 'bth_add_ext_' + extensionCounter;
+            newDiv.querySelectorAll('button')[1].id = 'bth_del_ext_' + extensionCounter;
+
+            // Increment the counter for the next unique ID
+            extensionCounter++;
+
+            // Insert the new div after the current div containing the button
+            templateDiv.parentNode.insertBefore(newDiv, templateDiv.nextSibling);
+
+        }
+
+        function deleteExtDef(element) {
+            const rowNumber = element.id.split('_')[3];
+            console.log('rowNumber:' + rowNumber)
+
+            const divToRemove = document.getElementById('ext_' + rowNumber);
+            divToRemove.remove();
+        }
+
+    </script>
+</body>
+
+</html>

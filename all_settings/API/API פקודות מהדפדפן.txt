@@ -1,0 +1,396 @@
+
+הרשמה
+התחברות
+
+הרשמה
+התחברות
+API פקודות מהדפדפן (דוגמאות)
+טיפים עצות והדגמות מהמשתמשים   27  108  3.3k
+  
+ההוי דן  20 ביולי 2020, 22:26
+יצירת שלוחה:
+יוצר שלוחה 6
+במקום XXX לשנות למספר המערכת
+ובמקום **** לשנות לסיסמה
+
+https://www.call2all.co.il/ym/api/UpdateExtension?token=079XXXXXXX:****&path=ivr2:/6
+https://www.call2all.co.il/ym/api/UpdateExtension?token=079XXXXXXX:****&path=ivr2:/6
+
+ 1 
+ששולי  20 ביולי 2020, 22:30
+איפוס ומחיקת מערכת
+זהירות!!! שימוש מושכל
+במקום 07950000000 לשנות למספר המערכת
+ובמקום 1234 לשנות לסיסמה
+
+https://call2all.co.il/ym/api/FileAction?token=0795000000:1234&action=delete&what=ivr2:/
+ 5 
+ההוי דן  20 ביולי 2020, 22:30
+שינוי קובץ EXT
+משנה את קובץ ההגדרות של שלוחה 5
+לסוג : מודל אמירת השעה
+ואח"כ מפנה לשלוחה ראשית
+(%0A)משמש במקום שורה חדשה
+
+https://www.call2all.co.il/ym/api/UploadTextFile?token=079XXXXXXX:****&what=ivr2:/5/ext.ini&contents=type=say_hour_and_minute%0Aend_goto=/
+https://www.call2all.co.il/ym/api/UploadTextFile?token=079XXXXXXX:****&what=ivr2:/5/ext.ini&contents=type=say_hour_and_minute end_goto=/
+
+ 2 
+ההוי דן  20 ביולי 2020, 22:37
+מייצר קובץ TTS
+קובץ TTS משמש להקראת טקסט ע"י המערכת בקול ממוחשב (רובוטי)
+בדוגמא זאת יווצר קובץ TTS בשם M1000 והוא יוקרא במקום הודעת ברירת מחדל
+
+https://www.call2all.co.il/ym/api/UploadTextFile?token=079XXXXX:****&what=ivr2:/M1000.tts&contents=מילים להקראה
+https://www.call2all.co.il/ym/api/UploadTextFile?token=079XXXXX:****&what=ivr2:/M1000.tts&contents=מילים_להקראה
+
+ 3 
+עעץ השדה 20 ביולי 2020, 22:55
+הפעלת קמפיין
+במקום 0799999999 לשנות למספר מערכת ובמקום 1234 - סיסמא
+במקום 234260 שמים את המספר קמפיין (ניתן לראות באתר החדש בלשונית 'רשימת קמפיינים', בכל שורה של קמפיין מופיע המספר הנ"ל)
+
+https://www.call2all.co.il/ym/api/RunCampaign?token=0799999999:1234&templateId=234260
+ 3 
+ההוי דן  21 ביולי 2020, 0:05
+@עידן אמר בAPI פקודות מהדפדפן (דוגמאות):
+
+@הוי-דן נא באר לנו
+מה זאת אומרת יצירת שלוחה? זה בשביל ההגדרות מתקדמות באתר או קשור לAPI?
+
+אם אין את השלוחה זה יוצר אותה, אפשר גם תתי שלוחות:
+6/5/4
+יוצר שלוחה 6 > ובפנים 5 ... 4
+משנים את הקישור לפי ההוראות, שמים אותו בשורת הכתובות, אנטר, והופ יש לך שלוחה חדשה (מבלי להכנס לאתר של ימות)
+
+ 0 
+Ddudu 21 ביולי 2020, 14:53
+דרך אגב,
+את כל הדברים שאפשר לעשות בצורה הזו של כתיבה בדפדפן, אפשר לעשות בצורה פשוטה וקלה ועוד הרבה יותר דברים ואפשרויות עם האקסס של אריה
+
+ 0 
+ההוי דן  21 ביולי 2020, 16:34
+הורדת קבצים
+בדוגמא הזאת מוריד את קובץ הנקודות
+צריך לשנות לנתיב המבוקש בדוגמא הנתיב (Points/Split/points_total.ini)
+יש לשים לב לאותיות גדולות וקטנות
+
+https://www.call2all.co.il/ym/api/DownloadFile?token=079XXXXXX:****&path=ivr2:/Points/Split/points_total.ini
+ 4 
+ההוי דן  21 ביולי 2020, 21:55
+העברת יחידות (דקות לחיוב)
+0791111111 זה המערכת שממנה מעבירים יחידות
+0792222222 ולשם היחדות עוברות
+הכמות היא 100 המינמום להעברה הוא 12
+
+https://www.call2all.co.il/ym/api/TransferUnits?token=0791111111:****&destination=0792222222&amount=100
+ 2 
+אא גוטן 22 ביולי 2020, 0:03
+@הוי-דן האם דרך זה, אפשר להעביר גם משרת לשרת?
+מה שאי אפשר דרך העברת יחידות במערכת
+
+ 0 
+ההוי דן  22 ביולי 2020, 0:04
+@א-גוטן אמר בAPI פקודות מהדפדפן (דוגמאות):
+
+@הוי-דן האם דרך זה, אפשר להעביר גם משרת לשרת?
+מה שאי אפשר דרך העברת יחידות במערכת
+
+לא, אי אפשר להעביר פחות מ 12 נקודות לא משנה איך.
+את קוד ה API שמים בדפדפן (בלי שרת)
+
+ 1 
+אא גוטן 22 ביולי 2020, 0:09
+@הוי-דן סליחה לא הבנת את השאלה,
+בדרך כלל אי אפשר להעביר יחידות בין מערכת שנמצא בשרת 1 למערכת שנמצא בשרת 2
+וכן בין משווק למשווק, אז שאלתי אם דרך הפקודה הזה זה כן הולך,
+אבל ניסיתי וזה לא הולך
+בכל מקרה תודה
+
+ 1 
+ההוי דן  22 ביולי 2020, 0:55
+קוד JS להרצה אוטמטית של כמה API מדפדפן
+ללחוץ (CTRL + SHIFT + j) ולעבור ל CONSOLE.
+בדוגמא יש שני API, אפשר להוסיף עוד עם פסיק ומרכאות: ['api' , 'api' , 'api']
+
+const urlList = ['https://www.call2all.co.il/ym/api/UploadTextFile?token=079******:****&what=ivr2:/5/ext.ini&contents=type=say_hour_and_minute%0Aend_goto=/',
+'https://www.call2all.co.il/ym/api/UploadTextFile?token=0799****:***&what=ivr2:/6/ext.ini&contents=type=say_hour_and_minute%0Aend_goto=/']
+const win = window.open(urlList[0], "_blank")
+var i = 1;
+var int = setInterval(() => {
+window.open(urlList[i], "_blank")
+  if (i++ >= urlList.length) clearInterval(int)
+}, 0)
+ 
+ 2 
+גגבאי 22 ביולי 2020, 7:40
+@הוי-דן תודה רבה רבה
+
+ 0 
+גגבאי 22 ביולי 2020, 7:48
+@הוי-דן אמר בAPI פקודות מהדפדפן (דוגמאות):
+
+קוד JS להרצה אוטמטית של כמה API מדפדפן
+ללחוץ (CTRL + SHIFT + I) ולעבור ל CONSOLE.
+בדוגמא יש שני API, אפשר להוסיף עוד עם פסיק ומרכאות: ['api' , 'api' , 'api']
+
+const urlList = ['/ym/api/UploadTextFile?token=079XXXXXXX:****&what=
+ivr2:/5/ext.ini&contents=type=say_hour_and_minute%0Aend_goto=/', 
+'/ym/api/UploadTextFile?token=079XXXXXXX:****&what=
+ivr2:/5/ext.ini&contents=type=say_hour_and_minute%0Aend_goto=/']
+const win = window.open(urlList[0], "_blank")
+let i = 1;
+let int = setInterval(() => {
+window.open(urlList[i], "_blank")
+  if (i++ >= urlList.length) clearInterval(int)
+}, 0)
+לא הבנתי איפה אני מכניס את הקוד הזה? אשמח להסבר נוסף
+
+ 0 
+Men770Men770 22 ביולי 2020, 9:30
+סימניה לאיפוס מערכת:
+
+javascript:(function(){location.href="https://call2all.co.il/ym/api/FileAction?token=" + prompt("מערכת:") + ":" + prompt("סיסמא:") + "&action=delete&what=ivr2:/";}())
+להשתמש בזהירות.
+
+ 2 
+Men770Men770 22 ביולי 2020, 9:32
+@הוי-דן אמר בAPI פקודות מהדפדפן (דוגמאות):
+
+ללחוץ (CTRL + SHIFT + I) ולעבור ל CONSOLE.
+
+ללחוץ Ctrl+Shift+J ולהדביק.
+
+ 0 
+גגבאי 22 ביולי 2020, 14:04
+@Men770 איפה להדביק?
+a511e712-eb06-4e09-9674-1e0867ed7fa5-image.png
+
+ 0 
+ההוי דן 22 ביולי 2020, 14:17
+@גבאי
+תלחץ (בצד ימין למטה) על המלה consle > מדביקים ואנטר
+
+ 0 
+אא גוטן 22 ביולי 2020, 17:22
+@הוי-דן תכתוב שהכוכביות אחרי המספר 079111111, צריכים להכניס את הסיסמא
+
+ 1 
+ההוי דן  22 ביולי 2020, 17:33
+@הוי-דן אמר בAPI פקודות מהדפדפן (דוגמאות):
+
+יצירת שלוחה:
+יוצר שלוחה 6
+במקום XXX לשנות למספר המערכת
+ובמקום **** לשנות לסיסמה
+
+https://www.call2all.co.il/ym/api/UpdateExtension?token=079XXXXXXX:****&path=ivr2:/6
+https://www.call2all.co.il/ym/api/UpdateExtension?token=079XXXXXXX:****&path=ivr2:/6
+
+@א-גוטן אמר בAPI פקודות מהדפדפן (דוגמאות):
+
+@הוי-דן תכתוב שהכוכביות אחרי המספר 079111111, צריכים להכניס את הסיסמאbolded text
+
+ 1 
+אא גוטן 22 ביולי 2020, 17:36
+@הוי-דן התכוונתי לזה
+העברת יחידות (דקות לחיוב)
+0791111111 זה המערכת שממנה מעבירים יחידות
+0792222222 ולשם היחדות עוברות
+הכמות היא 100 המינמום להעברה הוא 12
+
+ 0 
+Ddudu 23 ביולי 2020, 20:25
+@הוי-דן האם אפשר לכתוב את הפקודות הללו גם בתוך שלוחת API, לדוג':
+
+type=api
+api_link=https://www.call2all.co.il/ym/api/UpdateExtension?token=079XXXXXXX:****&path=ivr2:/6
+האם זה אמור לעבוד?
+
+ 1 
+Ddudu  23 ביולי 2020, 20:39
+@dudu כמה שבדקתי זה לא עובד...
+יש למישהו API למחיקת קובץ INI כלשהו משלוחה מסויימת?
+
+ 0 
+Men770Men770 24 ביולי 2020, 7:57
+@dudu אמר בAPI פקודות מהדפדפן (דוגמאות):
+
+@הוי-דן האם אפשר לכתוב את הפקודות הללו גם בתוך שלוחת API, לדוג':
+
+type=api
+api_link=https://www.call2all.co.il/ym/api/UpdateExtension?token=079XXXXXXX:****&path=ivr2:/6
+האם זה אמור לעבוד?
+
+לא אמור לעבוד.
+תנסה כך:
+
+type=api
+api_link=https://www.call2all.co.il/ym/api/UpdateExtension
+api_add_000=token=0777777777:1234
+api_add_001=path=ivr2:/6
+ 1 
+ממוטלה 24 ביולי 2020, 12:04
+@dudu אמר בAPI פקודות מהדפדפן (דוגמאות):
+
+יש למישהו API למחיקת קובץ INI כלשהו משלוחה מסויימת?
+
+מבוסס על הקוד של @שולי כאן
+
+https://call2all.co.il/ym/api/FileAction?token=079*******:****&action=delete&what=ivr2:/4/ApprovalAll.ini
+בדוגמה כאן מוחק את הקובץ ApprovalAll.ini משלוחה 4.
+(שים לב, אם לא תמלא את הנתונים אחרי ivr2:/ זה ימחק לך את כל המערכת)
+
+ 2 
+ממוטלה 24 ביולי 2020, 12:08
+@Men770 מה מוסיפים כדי שאח"כ יעבור לשלוחה אחרת?
+יש אפשרות גם להוסיף עוד פקודות באותו שלוחה?
+
+ 0 
+ממוטלה  24 ביולי 2020, 12:09
+@Men770 אמר בAPI פקודות מהדפדפן (דוגמאות):
+
+תנסה כך:
+
+type=api
+api_link=https://www.call2all.co.il/ym/api/UpdateExtension
+api_add_000=token=0777777777:1234
+api_add_001=path=ivr2:/6
+מה כותבים כדי שאח"כ יעבור לשלוחה אחרת?
+אפשר להוסיף עוד פקודה באותה שלוחה?
+
+ 0 
+ההוי דן  24 ביולי 2020, 12:27
+@Men770
+עריכה: ראיתי משהו כזה פה איפשהו
+
+api_add_003=end_goto=/
+ 0 
+ממוטלה  24 ביולי 2020, 12:31
+@הוי-דן @Men770 הגדרתי ולא עובד...
+
+type=api
+api_link=https://www.call2all.co.il/ym/api/UpdateExtension
+api_add_000=token=0795690000:1122
+api_add_001=path=ivr2:/3
+api_add_003=end_goto=/
+ 0 
+Men770Men770 24 ביולי 2020, 12:31
+@הוי-דן מה?
+אין היגיון שזה יעבוד.
+@מוטלה אתה יכול לעשת כך:
+
+type=api
+api_link=https://www.call2all.co.il/ym/api/UpdateExtension
+api_add_000=token=0795690000:1122
+api_add_001=path=ivr2:/3
+api_answer_ok=go_to_folder=/
+api_end_goto=הנתיב של השלוחה.
+ 0 
+ממוטלה 24 ביולי 2020, 12:37
+@Men770 לא עובד..??
+יש שקט ונתקע בשלוחה.
+
+ 0 
+ממוטלה 24 ביולי 2020, 13:08
+@הוי-דן הכנסתי את זה ולחצתי אנטר
+
+const urlList = ['/ym/api/UploadTextFile?token=079569****:1122&what=
+ivr2:/5/ext.ini&contents=type=say_hour_and_minute%0Aend_goto=/',
+'/ym/api/UploadTextFile?token=079569****:1122&what=
+ivr2:/5/ext.ini&contents=type=say_hour_and_minute%0Aend_goto=/']
+const win = window.open(urlList[0], "_blank")
+let i = 1;
+let int = setInterval(() => {
+window.open(urlList[i], "_blank")
+  if (i++ >= urlList.length) clearInterval(int)
+}, 0)
+וזה מה שהופיע:
+
+Uncaught SyntaxError: Invalid or unexpected token
+ואיקס אדום..
+מה זה אומר?
+
+ 0 
+ההוי דן 24 ביולי 2020, 13:10
+@מוטלה
+
+token=079569****:1122
+תחליף למספר המערכת, והסיסמה שלך (בלי כוכביות)
+כך:
+
+token=0791234567:1234
+ 1 
+ממוטלה 24 ביולי 2020, 13:13
+@הוי-דן ברור שעשיתי כך!
+
+ 0 
+ההוי דן  24 ביולי 2020, 13:14
+@מוטלה
+הוא טוען שהטוקן (סיסמת חיבור) שגויה
+תבדוק את מס המערכת והסיסמה(קורא טעויות הקלדה).
+
+ 1 
+ממוטלה 24 ביולי 2020, 13:18
+@הוי-דן כשאני מעלה את זה בצורה כזו
+
+https://www.call2all.co.il/ym/api/UploadTextFile?token=079569XXXX:1122&what=ivr2:/5/ext.ini&contents=type=say_hour_and_minute%0Aend_goto=/
+ישירות בשורת הדפדפן, זה עובד פצצה
+
+ 0 
+ההוי דן 24 ביולי 2020, 13:21
+@מוטלה אמר בAPI פקודות מהדפדפן (דוגמאות):
+
+@הוי-דן כשאני מעלה את זה בצורה כזו
+
+https://www.call2all.co.il/ym/api/UploadTextFile?token=079569XXXX:1122&what=ivr2:/5/ext.ini&contents=type=say_hour_and_minute%0Aend_goto=/
+ישירות בשורת הדפדפן, זה עובד פצצה
+
+תנסה את זה:
+
+בקוד חסר קצת בתחילת הקישור את זה
+
+https://www.call2all.co.il/
+תבדוק את כל הנתיב (זה לא יוצר שלוחה אם לא קיימת)
+תרענן את הדף של הCONSOLE
+
+ 1 
+ממוטלה  24 ביולי 2020, 13:24
+@הוי-דן לכתוב כך:
+
+const urlList = ['/ym/api/https://www.call2all.co.il/UploadTextFile?token=079569****:1122&what=
+ivr2:/5/ext.ini&contents=type=say_hour_and_minute%0Aend_goto=/',
+'/ym/api/https://www.call2all.co.il/UploadTextFile?token=079569****:1122&what=
+ivr2:/5/ext.ini&contents=type=say_hour_and_minute%0Aend_goto=/']
+const win = window.open(urlList[0], "_blank")
+let i = 1;
+let int = setInterval(() => {
+window.open(urlList[i], "_blank")
+  if (i++ >= urlList.length) clearInterval(int)
+}, 0)
+
+???
+לא עזר??
+
+ 0 
+ההוי דן  24 ביולי 2020, 13:30
+@מוטלה
+
+const urlList = ['https://www.call2all.co.il/ym/api/UploadTextFile?token=079******:****&what=ivr2:/5/ext.ini&contents=type=say_hour_and_minute%0Aend_goto=/',
+'https://www.call2all.co.il/ym/api/UploadTextFile?token=0799****:***&what=ivr2:/6/ext.ini&contents=type=say_hour_and_minute%0Aend_goto=/']
+const win = window.open(urlList[0], "_blank")
+var i = 1;
+var int = setInterval(() => {
+window.open(urlList[i], "_blank")
+  if (i++ >= urlList.length) clearInterval(int)
+}, 0)
+אתה צריך שיהיה לך שלוחה 5
+ושלוחה 6
+ולשנות בשני מקומות את מספר המערכת והסיסמה (שורה ראשונה ושלישית)
+ואז להריץ ב console
+(ctrl + shift + j)
+
+הקוד הזה משנה את סוג השלוחה (5 ו6) לשעון דובר > וחזרה לתפריט ראשי
+
+ 1 
+ 21 מתוך 108 

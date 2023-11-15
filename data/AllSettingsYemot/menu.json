@@ -1,0 +1,29 @@
+{
+    "name": "תפריט",
+    "description": "הגדרות מודול תפריט בסיסי של ימות המשיח",
+    "definitions": {
+        "type": {
+            "value": "type=menu",
+            "required": true,
+            "description": "הגדרות מודול תפריט בסיסי של ימות המשיח"
+        },
+        "def_1": {
+            "value": "digits={2}",
+            "required": false,
+            "description": "תפריט לשלוחות בעלות 2 ספרות או יותר",
+            "dependence": [
+                "def_2",
+                "def_4"
+            ]
+        },
+        "def_2": {
+            "value": "timeout={10}",
+            "required": false,
+            "description": "זמן ההמתנה ליה. מתנה הגדרתם יותר מ2 ספרות",
+            "dependence": [
+                "def_2",
+                "def_4"
+            ]
+        }
+    }
+}

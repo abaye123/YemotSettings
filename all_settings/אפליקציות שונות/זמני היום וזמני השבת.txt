@@ -1,0 +1,10 @@
+זמני היום
+type=zmanim
+זמני שבת
+type=say_sabbath_time
+לאן לעבור בסיום
+
+say_sabbath_time_end_goto=/
+ראה כאן את האפשרויות להגדרה כולל ניתוק.
+
+

@@ -1,0 +1,7 @@
+הקלטת השאלות ניתן ע"י: הקלטת שאלות טריוויה
+
+type=trivia_questions
+trivia_type=admin
+record_trivia_american=yes
+trivia_questions_val=השלוחה של המבחן
+trivia_questions_location=always 

@@ -1,0 +1,53 @@
+{
+  "ivr2": "",
+  "settings": {
+    "menu": {
+      "digits": {
+        "value": "digits",
+        "desc": "תפריט עם שלוחות מרובות",
+        "default": "1",
+        "valueas": "1-9",
+        "link": ""
+      },
+      "timeout": {
+        "value": "timeout",
+        "desc": "כמה זמן להמתין",
+        "default": "8",
+        "valueas": "0-9",
+        "link": ""
+      }
+    },
+    "playfile": {
+      "folder_to_play": {
+        "value": "folder_to_play",
+        "desc": "מיקום הקבצים שיושמעו בשלוחה",
+        "default": "1",
+        "valueas": "1-9, tfr",
+        "link": ""
+      },
+      "start": {
+        "value": "start",
+        "desc": "סדר ההשמעה מהגדול לקטן או להיפך",
+        "default": "max",
+        "valueas": "max, min",
+        "link": ""
+      }
+    },
+    "global": {
+      "password": {
+        "value": "password",
+        "desc": "סיסמה בכניסה לשלוחה",
+        "default": "1234",
+        "valueas": "0-9",
+        "link": ""
+      },
+      "title": {
+        "value": "title",
+        "desc": "כותרת ותיאור לשלוחה",
+        "default": "כותרת השלוחה",
+        "valueas": "0-9 A-Z",
+        "link": ""
+      }
+    }
+  }
+}
