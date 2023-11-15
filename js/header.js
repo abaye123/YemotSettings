@@ -15,11 +15,11 @@ function myHeader() {
 
     // Create list items
     const menuItems = [
-        { href: '/', text: 'דשבורד ראשי' },
+        { href: '/YemotSettings/', text: 'דשבורד ראשי' },
         { href: '#services', text: 'ניהול תבניות' },
-        { href: '/TemplateEditor.html', text: 'יצירת תבנית' },
-        { href: '/BuildingSystem.html', text: 'אפיון מערכת' },
-        { href: '/blog/blog.html', text: 'הגדרות' },
+        { href: '/YemotSettings/TemplateEditor.html', text: 'יצירת תבנית' },
+        { href: '/YemotSettings/BuildingSystem.html', text: 'אפיון מערכת' },
+        { href: '/YemotSettings', text: 'הגדרות' },
         { href: '#contact', text: 'צור קשר' }
     ];
 
