@@ -15,10 +15,10 @@ function myHeader() {
 
     // Create list items
     const menuItems = [
-        { href: '#about', text: 'דשבורד ראשי' },
+        { href: '/', text: 'דשבורד ראשי' },
         { href: '#services', text: 'ניהול תבניות' },
-        { href: '#products', text: 'יצירת תבנית' },
-        { href: '/link.html', text: 'אפיון מערכת' },
+        { href: '/TemplateEditor.html', text: 'יצירת תבנית' },
+        { href: '/BuildingSystem.html', text: 'אפיון מערכת' },
         { href: '/blog/blog.html', text: 'הגדרות' },
         { href: '#contact', text: 'צור קשר' }
     ];
