@@ -28,7 +28,7 @@
     border: 1px solid #162eff;
     border-radius: 8px;
     width: 100%;
-    max-height: 150px;
+    max-height: 180px;
     max-width: 420px;
     overflow-y: auto;
 }
@@ -53,5 +53,5 @@
 
 #autocomplete-list button:hover {
     color: #162eff;
-    border-color: #162eff;
+    font-weight: 500;
 }

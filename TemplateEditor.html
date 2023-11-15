@@ -359,6 +359,9 @@
 
                         var label = document.createElement('label');
                         label.textContent = 'לחץ על טאב בכדי לעבור בין הפריטים, ועל Esc כדי לסגור';
+                        label.dir = "rtl";
+                        label.style.fontSize = "14px";
+                        label.style.marginTop = "5px";
                         autocompleteList.appendChild(label);
 
                         // Show the autocomplete list below the cursor position
