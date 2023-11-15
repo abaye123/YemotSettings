@@ -20,13 +20,25 @@
     <script>
         function init() {
             myHeader();
-            //myFooter();
-            //mySidebar();
+            myFooter();
+            mySidebar();
 
             getListTemplate()
 
         }
+
     </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GMERG2MRGX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-GMERG2MRGX');
+    </script>
+
     <style>
 
     </style>
@@ -117,9 +129,11 @@
                         select.removeChild(select.firstChild);
                     }
 
+
                     const option = document.createElement('option');
-                    option.value = 'select';
-                    option.textContent = 'בחר תבנית מהרשימה..';
+                    option.value = '';
+                    option.disabled = false;
+                    option.textContent = 'בחר תבנית מהרשימה';
                     select.appendChild(option);
 
                     // Populate with new options
@@ -191,6 +205,10 @@
                     document.getElementById("desc_template").innerHTML = "נסה שנית מאוחר יותר, או דווח לנו על הבעיה";
                 });
 
+            select = document.getElementById('templateList')
+            if (select.value !== "") {
+                select.options[0].disabled = true;
+            }
         }
 
 
