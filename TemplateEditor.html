@@ -51,9 +51,35 @@
                 <p id="desc_template">תיאור והסבר אודות התבנית וההגדרות הכלליות של התבנית שנבחרה</p>
 
                 <h2 id="title_textarea_def">להלן הגדרות ברירת המחדל של התבנית:</h2>
-                <div id="extini_editor">
+                <div id="extini_editor" style="display: flex;">
                     <textarea id="extini_editor_textarea" dir="ltr">type=menu</textarea>
                     <div id="autocomplete-list" dir="ltr"></div>
+
+                    <div id="advancedOptions" dir="rtl">
+                        <h2>אפשרויות מתקדמות:</h2>
+
+                        <label>מספר מערכת:</label>
+                        <input type="tel"></input>
+                        </br>
+                        <label>סיסמה:</label>
+                        <input id="inputPassword" type="password"></input>
+                        <button onclick="showPassword(this, '#inputPassword')">הצג תווים</button>
+                        </br>
+                        <label>נתיב שלוחה לייבוא/עדכון:</label>
+                        <input type="text" placeholder="הזן כ'5' או '3/4'"></input>
+                        <button>טען הגדרות</button>
+                        <button>עדכן הגדרות בשלוחה</button>
+                        </br>
+                        <label>עדכון מרובה שלוחות, יש להפריד בין שלוחות בפסיק:</label>
+                        </br>
+                        <input type="text" placeholder="4, 1/3, 5" style="width: 260px;"></input>
+                        <button>עדכן הגדרות בכל השלוחות</button>
+                        </br>
+                        <label>אפשרויות שמירה:</label>
+                        <button>שמור הגדרות כקובץ טקסט</button>
+                        <button>שמור הגדרות כתבנית</button>
+
+                    </div>
                 </div>
 
             </div>
@@ -63,6 +89,17 @@
     <div id="myFooter"></div>
 
     <script>
+
+        function showPassword(button, element) {
+            var passwordInput = document.querySelector(element);
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                button.textContent = 'הסתר סיסמה'
+            } else {
+                passwordInput.type = 'password';
+                button.textContent = 'הצג סיסמה'
+            }
+        }
 
         function handleEscKey(event) {
             if (event.key === "Escape" || event.key === "Esc") {

@@ -17,6 +17,11 @@
     padding-left: 8px;
 }
 
+#advancedOptions {
+    padding: 20px;
+    padding-top: 0px;
+}
+
 #autocomplete-list {
     display: none;
     position: absolute;
@@ -29,14 +34,25 @@
     overflow-y: auto;
 }
 
+
 #autocomplete-list button {
-    width: 100%;
-    text-align: left;
-    font-size: 14pt;
     font-family: Rubik, sans-serif;
     background-color: #f7f5ff;
+    color: #000000;
+    font-size: 14pt;
+    width: 100%;
+    text-align: left;
+    font-weight: 400;
+    margin: 0;
     padding: 6px;
+    padding-top: 4px;
+    padding-bottom: 4px;
     border: 0.2px solid #ffffff;
     border-radius: 0px;
     cursor: pointer;
+}
+
+#autocomplete-list button:hover {
+    color: #162eff;
+    border-color: #162eff;
 }

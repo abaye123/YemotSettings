@@ -22,3 +22,71 @@ body {
     padding-right: 40px;
     
 }
+
+button {
+    font-family: Rubik, sans-serif;
+    background-color: #162eff;
+    color: #f7f5ff;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 10px;
+    padding: 16px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border: 2px;
+    border-style: solid;
+    border-color: #162eff;
+    border-radius: 10px;
+}
+
+button:hover {
+    background-color: yellow;
+    color: #162eff;
+    border-color: #162eff;
+}
+
+input {
+    font-family: Rubik, sans-serif;
+    background-color: #f7f5ff;
+    color: #162eff;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 10px;
+    margin-right: 2px;
+    padding: 16px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border: 2px;
+    border-style: solid;
+    border-color: #162eff;
+    border-radius: 8px;
+    width: 150px;
+}
+
+label {
+    font-family: Rubik, sans-serif;
+    background-color: #f7f5ff;
+    color: #162eff;
+    font-size: 20px;
+    font-weight: 500;
+    margin-right: 10px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+select {
+    font-family: Rubik, sans-serif;
+    background-color: #f7f5ff;
+    color: #162eff;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 10px;
+    margin-right: 2px;
+    padding: 16px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border: 2px;
+    border-style: solid;
+    border-color: #162eff;
+    border-radius: 8px; 
+}
