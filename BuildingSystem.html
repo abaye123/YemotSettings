@@ -117,10 +117,14 @@
 
         function deleteExtDef(element) {
             const rowNumber = element.id.split('_')[3];
-            console.log('rowNumber:' + rowNumber)
+    
+            if (rowNumber !== '1') {
+                const divToRemove = document.getElementById('ext_' + rowNumber);
+                divToRemove.remove();
+            } else {
+                console.log('error. The row numbered ' + rowNumber + ' cannot be deleted')
+            }
 
-            const divToRemove = document.getElementById('ext_' + rowNumber);
-            divToRemove.remove();
         }
 
     </script>

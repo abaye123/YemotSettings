@@ -15,12 +15,16 @@
     <script src="js/header.js"></script>
     <script src="js/sidebar.js"></script>
     <script src="js/footer.js"></script>
+    <script src="js/load.js"></script>
 
     <script>
         function init() {
             myHeader();
-            myFooter();
-            mySidebar();
+            //myFooter();
+            //mySidebar();
+
+            getListTemplate()
+
         }
     </script>
     <style>
@@ -30,11 +34,11 @@
 
 <body onload="init()">
 
-  <!-- Yellow ribbon with the inscription -->
-  <div class="ribbon">
-    האתר בתהליך פיתוח
-  </div>
-  
+    <!-- Yellow ribbon with the inscription -->
+    <div class="ribbon">
+        האתר בתהליך פיתוח
+    </div>
+
     <div id="myHeader"></div>
     <div id="sidebar"></div>
 
@@ -42,20 +46,19 @@
         <div class="rounded-container">
             <h1>עורך ההגדרות</h1>
             <label for="option">בחר את התבנית או ההגדרה:</label>
-            <select id="setting" name="option" onchange="getSetting()">
+            <select id="templateList" name="option" onchange="getSettingForTemplate()">
                 <option value="none">לא נטענו תבניות</option>
             </select>
 
             <button onclick="getListTemplate()">רענן רשימה</button>
-            <h3 id="settingText"></h3>
-            <h3 id="definitionsText"></h3>
 
             <div id="definitions">
 
                 <h2 id="title_template">שם התבנית שנטענה</h2>
                 <p id="desc_template">תיאור והסבר אודות התבנית וההגדרות הכלליות של התבנית שנבחרה</p>
 
-                <h2 id="title_textarea_def">להלן הגדרות ברירת המחדל של התבנית:</h2>
+                <label>הגדרות ברירת המחדל:</label>
+
                 <div id="extini_editor" style="display: flex;">
                     <textarea id="extini_editor_textarea" dir="ltr">type=menu</textarea>
                     <div id="autocomplete-list" dir="ltr"></div>
@@ -94,6 +97,102 @@
     <div id="myFooter"></div>
 
     <script>
+
+        function getListTemplate() {
+            Promise.all([
+                fetchAndParseCsv("data/listAllSettingsYemot.csv", 'ימות'),
+                fetchAndParseCsv('data/listAllTemplate.csv', 'תבנית'),
+                fetchAndParseCsv('data/user/listAllTemplateUser.csv', 'תבנית אישית')
+            ])
+                .then(dataArray => {
+                    console.log(dataArray);
+                    const mergedData = mergeDataArrays(dataArray);
+                    console.log(dataArray);
+                    //populateComboBox(mergedData, rowNumber);
+
+                    const select = document.getElementById('templateList');
+
+                    // Clear existing options
+                    while (select.firstChild) {
+                        select.removeChild(select.firstChild);
+                    }
+
+                    const option = document.createElement('option');
+                    option.value = 'select';
+                    option.textContent = 'בחר תבנית מהרשימה..';
+                    select.appendChild(option);
+
+                    // Populate with new options
+                    mergedData.forEach(item => {
+                        const option = document.createElement('option');
+                        option.value = item.value;
+                        option.textContent = item.text;
+                        select.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching CSV files:', error));
+        }
+
+
+        function getSettingForTemplate() {
+            var selectElement = document.getElementById('templateList');
+            var selectedtemplateList = selectElement.value;
+            var selectedIndex = selectElement.selectedIndex;
+            var selectedOption = selectElement.options[selectedIndex];
+            var selectedtemplateListText = selectedOption.text;
+
+            const editorTextarea = document.getElementById('extini_editor_textarea')
+            editorTextarea.innerHTML = '';
+
+            const regex = /\(([^)]+)\)/;
+            const match = selectedtemplateList.match(regex);
+
+            let value, type;
+
+            if (match) {
+                value = selectedtemplateList.replace(regex, '').trim();
+                type = match[1].trim();
+            } else {
+                // If there are no parentheses, set both values to the original string
+                value = selectedtemplateList.trim();
+                type = selectedtemplateList.trim();
+            }
+
+            let pathJson;
+            if (type == "ימות") {
+                pathJson = 'data/AllSettingsYemot'
+            } else if (type == "תבנית") {
+                pathJson = 'data/templates'
+            } else if (type == "תבנית אישית") {
+                pathJson = 'data/user/personalTemplates'
+            }
+
+            let url = `${pathJson}/${value}.ini`;
+
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.text();
+                })
+                .then(textData => {
+                    console.log(textData);
+                    textData = textData.replace(/}/g, '');
+                    textData = textData.replace(/{/g, '');
+                    editorTextarea.innerHTML = textData;
+                    document.getElementById("title_template").innerHTML = "נטענה התבנית '" + selectedtemplateListText + "'";
+                    document.getElementById("desc_template").innerHTML = "באפשרותך לערוך את התבנית או להשתמש בה";
+                })
+                .catch(error => {
+                    console.error('Error fetching text file:', error.message);
+                    console.error('Error fetching text file:', selectedtemplateList);
+                    document.getElementById("title_template").innerHTML = "אירעה שגיאה בעת טעינת התבנית '" + selectedtemplateListText + "'. ייתכן והתבנית אינה קיימת";
+                    document.getElementById("desc_template").innerHTML = "נסה שנית מאוחר יותר, או דווח לנו על הבעיה";
+                });
+
+        }
+
 
         function showPassword(button, element) {
             var passwordInput = document.querySelector(element);
@@ -239,6 +338,10 @@
 
                             autocompleteList.appendChild(button);
                         });
+
+                        var label = document.createElement('label');
+                        label.textContent = 'לחץ על טאב בכדי לעבור בין הפריטים, ועל Esc כדי לסגור';
+                        autocompleteList.appendChild(label);
 
                         // Show the autocomplete list below the cursor position
                         const cursorPos = this.getBoundingClientRect();
