@@ -90,10 +90,8 @@ select {
     border-radius: 8px;
 }
 
-#banner {
+.banner {
     position: fixed;
-    top: 150px;
-    left: -300px;
     padding: 20px;
     color: #fff;
     font-size: 18pt;
@@ -101,24 +99,24 @@ select {
     animation: slideIn 1s forwards, growAndShrink 2s 1s 2 forwards;
     display: none;
     z-index: 900;
-}
+  }
 
-@keyframes slideIn {
+  @keyframes slideIn {
     to {
-        left: 35px;
+      left: 35px;
     }
-}
+  }
 
-@keyframes growAndShrink {
+  @keyframes growAndShrink {
     0% {
-        transform: scale(1);
+      transform: scale(1);
     }
 
     50% {
-        transform: scale(1.2);
+      transform: scale(1.2);
     }
 
     100% {
-        transform: scale(1);
+      transform: scale(1);
     }
-}
+  }

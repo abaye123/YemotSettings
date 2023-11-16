@@ -21,9 +21,24 @@ function pathFiles(value) {
     return pathMappings[value] || null;
 }
 
+function clickStart(button) {
+    console.log(button)
+    button.style.backgroundColor = 'orange';
+    button.style.borderColor = 'orange';
+}
 
-function showStatusIndicator(button ,success) {
-    // Assuming you have two image URLs for a checkmark (V) and an X
+function clickStop(button) {
+    button.style.backgroundColor = '';
+    button.style.borderColor = '';
+    /*
+    setTimeout(function () {
+        button.style.backgroundColor = '';
+        button.style.borderColor = '';
+    }, 1500);
+    */
+}
+
+function showStatusIndicator(button, success) {
     const checkmarkUrl = 'https://www.shutterstock.com/image-vector/checkmark-icon-vector-on-white-260nw-1265329480.jpg';
     const xMarkUrl = 'https://uxwing.com/wp-content/themes/uxwing/download/checkmark-cross/cross-icon.svg';
 
@@ -49,23 +64,34 @@ function showStatusIndicator(button ,success) {
 }
 
 function showBanner(bool, message) {
-    const banner = document.getElementById('banner');
+    const bannersContainer = document.getElementById('banners-container');
 
-    if (bool) {
-        banner.textContent = message;
-        banner.style.color = '#ffffff';
-        banner.style.backgroundColor = 'green';
-    } else {
-        banner.textContent = message;
-        banner.style.color = '#ffffff';
-        banner.style.backgroundColor = 'red';    
-    }
+    // Get the height of the existing banners
+    const existingBannersHeight = Array.from(bannersContainer.children)
+        .reduce((totalHeight, banner) => totalHeight + banner.offsetHeight + 10, 0);
 
-    banner.style.display = 'block';
-    banner.classList.add('slide-in-animation');
+    // Create a new banner
+    const newBanner = document.createElement('div');
+    newBanner.className = 'banner';
+    newBanner.textContent = message;
+    newBanner.style.color = '#ffffff';
+    newBanner.style.backgroundColor = bool ? 'green' : 'red';
+    newBanner.classList.add('slide-in-animation');
+
+    // Append the new banner to the container
+    bannersContainer.appendChild(newBanner);
+
+    // Position the new banner below the existing banners
+    newBanner.style.top = `${150 + existingBannersHeight}px`;
+    newBanner.style.left = '-300px';
+    newBanner.style.display = 'block';
 
     setTimeout(() => {
-      banner.style.display = 'none';
-      banner.classList.remove('slide-in-animation');
+        newBanner.style.display = 'none';
+        bannersContainer.removeChild(newBanner);
     }, 7000);
-  }
+
+    setTimeout(() => {
+        newBanner.style.left = '35px';
+    }, 0);
+}

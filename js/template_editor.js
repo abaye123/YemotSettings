@@ -2,44 +2,35 @@ function saveIniFile() {
     var textarea = document.getElementById('extini_editor_textarea');
     var content = textarea.value;
 
-    // Check if content is not empty and has more than X characters (replace X with your desired value)
     if (content.trim() !== '' && content.length > 3) {
-        var match = content.match(/type=(\w+)/);
-        var currentDate = new Date();
-        var year = currentDate.getFullYear();
-        var month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
-        var day = ('0' + currentDate.getDate()).slice(-2);
-        var hours = ('0' + currentDate.getHours()).slice(-2);
-        var minutes = ('0' + currentDate.getMinutes()).slice(-2);
-        var seconds = ('0' + currentDate.getSeconds()).slice(-2);
-        var formattedDateTime = year + '-' + month + '-' + day + '_' + hours + '-' + minutes + '-' + seconds;
-        var fileType = match ? match[1] : 'default_' + formattedDateTime;
-        var filename = fileType + '.ini';
+        var textFileName = document.getElementById('inputFileName').value;
+        var filename;
+        if (textFileName.length > 0) {
+            filename = textFileName + '.ini';
+        } else {
+            var match = content.match(/type=(\w+)/);
+            var fileType = match ? match[1] : 'default';
+            filename = fileType + '.ini';
+        }
+
         var blob = new Blob([content], { type: 'text/plain' });
         var link = document.createElement('a');
-
-        // Set the download attribute and create the URL
         link.download = filename;
         link.href = window.URL.createObjectURL(blob);
 
-        // Event listener for successful download
         link.onload = function () {
             console.log('Download successful!');
-            // Clean up
             window.URL.revokeObjectURL(link.href);
             document.body.removeChild(link);
         };
 
-        // Event listener for failed download
         link.onerror = function () {
             console.error('Download failed!');
             showBanner(false, 'התרחשה שגיאה לא ידועה');
-            // Clean up
             window.URL.revokeObjectURL(link.href);
             document.body.removeChild(link);
         };
 
-        // Trigger the download
         document.body.appendChild(link);
         link.click();
         showBanner(true, 'הקובץ נשמר בהצלחה');
@@ -48,8 +39,8 @@ function saveIniFile() {
     }
 }
 
-
-async function getExtSettingsYemot() {
+async function getExtSettingsYemot(button) {
+    clickStart(button);
     let numberIvr = document.querySelector('#inputNumber').value;
     let passwordIvr = document.querySelector('#inputPassword').value;
     if (numberIvr.length > 3 && passwordIvr.length > 2) {
@@ -77,10 +68,12 @@ async function getExtSettingsYemot() {
     } else {
         showBanner(false, 'שגיאה במספר המערכת או הסיסמה');
     }
+    clickStop(button);
 }
 
 
-async function setExtSettingsYemot() {
+async function setExtSettingsYemot(button) {
+    clickStart(button);
     let numberIvr = document.querySelector('#inputNumber').value;
     let passwordIvr = document.querySelector('#inputPassword').value;
     var pathIvr = document.querySelector('#inputPath').value;
@@ -116,4 +109,102 @@ async function setExtSettingsYemot() {
     } else {
         showBanner(false, 'לא נבחרה שלוחה');
     }
+    clickStop(button);
+}
+
+
+async function setTextExtsSettingsYemot(button) {
+    clickStart(button);
+    let numberIvr = document.querySelector('#inputNumber').value;
+    let passwordIvr = document.querySelector('#inputPassword').value;
+    let textExt = document.querySelector('#extini_editor_textarea').value;
+    var paths = document.querySelector('#inputPaths').value;
+    if (paths.length > 0) {
+        if (numberIvr.length > 3 && passwordIvr.length > 2) {
+            let token = await login(numberIvr, passwordIvr);
+            if (token !== false) {
+                let settings = 'title=הוגדר באמצעות מערכת הגדרות מתקדמות';
+                var pathArray = paths.split(', ');
+                pathArray.forEach(async function (path) {
+                    if (path === '#') {
+                        path = '';
+                    }
+                    console.log(path);
+                    let responseExt = await updateExtensionSettings(token, path, settings);
+                    if (responseExt == true) {
+                        let pathExt = path + '/ext.ini';
+                        setTimeout(async function () {
+                            responseText = await uploadTextToFile(token, pathExt, textExt);
+                            if (path === '') {
+                                path = 'ראשית';
+                            }
+                            if (responseText == true) {
+                                showBanner(true, 'ההגדרות נשמרו בהצלחה בשלוחה ' + path);
+                            } else {
+                                showBanner(false, 'שגיאה בהעלאת ההגדרות לשלוחה ' + path);
+                            }
+                        }, 300);
+                    } else {
+                        showBanner(false, 'שגיאה בטעינת שלוחה ' + path);
+                    }
+                });
+            } else {
+                showBanner(false, 'שגיאה בהתחברות למערכת. טוקן שגוי');
+            }
+        } else {
+            showBanner(false, 'שגיאה במספר המערכת או הסיסמה');
+        }
+    } else {
+        showBanner(false, 'אין שלוחות להגדרה');
+    }
+    clickStop(button);
+}
+
+
+async function setUpdateExtsSettingsYemot(button) {
+    clickStart(button);
+    let numberIvr = document.querySelector('#inputNumber').value;
+    let passwordIvr = document.querySelector('#inputPassword').value;
+    let textExt = document.querySelector('#extini_editor_textarea').value;
+    var paths = document.querySelector('#inputPaths').value;
+    if (paths.length > 0) {
+        if (numberIvr.length > 3 && passwordIvr.length > 2) {
+            let token = await login(numberIvr, passwordIvr);
+            if (token !== false) {
+                let linesArray = textExt.split('\n');
+                var settings = linesArray.join('&');
+                if (settings.endsWith('&')) {
+                    settings = settings.slice(0, -1);
+                  }
+                console.log(settings);
+
+                var pathArray = paths.split(', ');
+                pathArray.forEach(async function (path) {
+                    if (path === '#') {
+                        path = '';
+                    }
+
+                    console.log(path);
+                    setTimeout(async function () {
+                        let responseExt = await updateExtensionSettings(token, path, settings);
+                        if (path === '') {
+                            path = 'ראשית';
+                        }
+                        if (responseExt == true) {
+                            showBanner(true, 'ההגדרות נשמרו בהצלחה בשלוחה ' + path);
+                        } else {
+                            showBanner(false, 'שגיאה בהעלאת ההגדרות לשלוחה ' + path);
+                        }
+                    }, 200);
+                });
+            } else {
+                showBanner(false, 'שגיאה בהתחברות למערכת. טוקן שגוי');
+            }
+        } else {
+            showBanner(false, 'שגיאה במספר המערכת או הסיסמה');
+        }
+    } else {
+        showBanner(false, 'אין שלוחות להגדרה');
+    }
+    clickStop(button);
 }
