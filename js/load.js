@@ -5,9 +5,9 @@ function getListSettingsB(element) {
   console.log('Updating select box for row ' + rowNumber);
   console.log("t");
   Promise.all([
-    fetchAndParseCsv("data/listAllSettingsYemot.csv", 'ימות'),
-    fetchAndParseCsv('data/listAllTemplate.csv', 'תבנית'),
-    fetchAndParseCsv('data/user/listAllTemplateUser.csv', 'תבנית אישית')
+    fetchAndParseCsv('ימות'),
+    fetchAndParseCsv('תבנית'),
+    fetchAndParseCsv('תבנית אישית')
   ])
     .then(dataArray => {
       const mergedData = mergeDataArrays(dataArray);
@@ -17,8 +17,9 @@ function getListSettingsB(element) {
 }
 
 
-function fetchAndParseCsv(csvPath, label) {
-  console.log(csvPath)
+function fetchAndParseCsv(label) {
+  let csvPath = pathFiles(label);
+  console.log(csvPath);
   return fetch(csvPath)
     .then(response => response.text())
     .then(data => {
@@ -97,15 +98,7 @@ function getSettingExt(element) {
     type = selectedSetting.trim();
   }
 
-  let pathJson;
-  if (type == "ימות") {
-    pathJson = 'data/AllSettingsYemot'
-  } else if (type == "תבנית") {
-    pathJson = 'data/templates'
-  } else if (type == "תבנית אישית") {
-    pathJson = 'data/user/personalTemplates'
-  }
-
+  let pathJson = pathFolders(type);
   let url = `${pathJson}/${value}.ini`;
 
   fetch(url)
@@ -173,7 +166,6 @@ function processContentWithinBrackets(element, line, x) {
 
   //line = line.replace(/}/g, '');
   //line = line.replace(/{/g, '');
-
 
   const newLabel = document.createElement('label');
   newLabel.id = 'ext_op_Label_' + x;

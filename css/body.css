@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap&family=Secular+Onewght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap');
 
 body {
     margin: 0;
@@ -14,13 +14,13 @@ body {
     position: absolute;
 }
 
-.rounded-container { 
+.rounded-container {
     border-radius: 20px;
     background-color: #f7f5ff;
     padding: 20px;
     margin: 20px;
     padding-right: 40px;
-    
+
 }
 
 button {
@@ -87,5 +87,38 @@ select {
     border: 2px;
     border-style: solid;
     border-color: #162eff;
-    border-radius: 8px; 
+    border-radius: 8px;
+}
+
+#banner {
+    position: fixed;
+    top: 150px;
+    left: -300px;
+    padding: 20px;
+    color: #fff;
+    font-size: 18pt;
+    border-radius: 5px;
+    animation: slideIn 1s forwards, growAndShrink 2s 1s 2 forwards;
+    display: none;
+    z-index: 900;
+}
+
+@keyframes slideIn {
+    to {
+        left: 35px;
+    }
+}
+
+@keyframes growAndShrink {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }

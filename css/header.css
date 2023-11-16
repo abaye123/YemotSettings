@@ -75,6 +75,36 @@ header ul li a:hover {
     color: #333333;
 }
 
+#notificationHeader {
+    position: fixed;
+    top: 2px;
+    left: 15%;
+    width: 70%;
+    text-align: center;
+    font-size: 18pt;
+    background-color: #f4f477;
+    padding: 2px;
+    color: #162eff;
+    border-radius: 10px;
+    z-index: 898;
+    white-space: nowrap;
+  }
+
+#notificationHeaderText {
+    white-space: nowrap;
+    animation: scrollText 18s linear infinite;
+}
+
+  @keyframes scrollText {
+    0% {
+      transform: translateX(-15%); /* Start position from the right */
+    }
+    100% {
+      transform: translateX(30%); /* End position to the left */
+    }
+  }
+
+
 
 /* Styles for the yellow ribbon */
 .ribbon {
@@ -90,5 +120,5 @@ header ul li a:hover {
     font-weight: bold;
     transform: rotate(-45deg); /* Rotate the ribbon by -45 degrees */
     transform-origin: 0 0; /* Set the rotation origin to the top left corner */
-    z-index: 999; /* Ensure the ribbon is on top of other elements */
+    z-index: 899; /* Ensure the ribbon is on top of other elements */
   }

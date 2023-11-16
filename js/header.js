@@ -41,4 +41,8 @@ function myHeader() {
     // Append header to the "myHeader" div
     const myHeaderDiv = document.getElementById('myHeader');
     myHeaderDiv.appendChild(header);
+
+    const mynotificationHeaderDiv = document.getElementById('notificationHeaderText');
+    mynotificationHeaderDiv.textContent = "האתר עדיין בפיתוח... 🔨 כפתורי העדכון מרובה השלוחות ושמירת ההגדרות לתבנית עדיין אינם פעילים. ליצירת קשר, הערות והארות ניתן לשלוח מייל לcs@abaye.co";
+
 }

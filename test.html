@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disable Button Example</title>
+</head>
+<body>
+
+  <button id="myButton" onclick="myFunction()">Click me</button>
+
+  <script>
+    function myFunction() {
+      // Assuming you have a button with an id "myButton"
+      var button = document.getElementById('myButton');
+
+      // Check if the button is found
+      if (button) {
+        // Disable the button
+        button.disabled = true;
+      }
+    }
+  </script>
+
+</body>
+</html>

@@ -82,6 +82,19 @@ async function updateExtensionSettings(token, path, settings) {
 }
 
 
+async function getTextFile(token, path) {
+    let response = await fetch(`${urlYemotApi}GetTextFile?token=${token}&what=ivr2:${path}`);
+    var req = await response.text();
+    writeLog("response: " + req);
+    req = JSON.parse(req);
+    writeLog(req.responseStatus);
+    if (req.responseStatus == 'OK') {
+        return req.contents;
+    } else {
+        return false;
+    }
+}
+
 function writeLog(message) {
     // Implement your logging logic here
     // For example, logging to console:
