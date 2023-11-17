@@ -1,0 +1,23 @@
+.folder {
+    margin-left: 20px;
+    margin-top: 4px;
+    padding: 2px;
+    font-size: 20px;
+    background-color: #f7f5ff;
+    border-radius: 10px;
+    color: #162eff;
+    cursor: pointer;
+}
+
+.subfolders {
+    display: none;
+}
+
+.ini-file {
+    margin-left: 20px;
+    margin-top: 4px;
+    padding: 2px;
+    font-size: 18px;
+    color: rgb(223, 81, 25);
+    cursor: pointer;
+}

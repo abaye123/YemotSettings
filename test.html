@@ -1,149 +1,67 @@
 <!DOCTYPE html>
-<html lang="iw" dir="rtl">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>עורך ההגדרות | אביי</title>
-
-    <link rel="stylesheet" type="text/css" href="css/body.css" />
-    <link rel="stylesheet" type="text/css" href="css/header.css" />
-    <link rel="stylesheet" type="text/css" href="css/sidebar.css" />
-    <link rel="stylesheet" type="text/css" href="css/footer.css" />
-    <link rel="stylesheet" type="text/css" href="css/template_editor.css" />
-    <script src="js/header.js"></script>
-    <script src="js/sidebar.js"></script>
-    <script src="js/footer.js"></script>
-    <script src="js/global.js"></script>
-
-    <script src="js/load.js"></script>
-    <script src="js/yemot.js"></script>
-    <script src="js/template_editor.js"></script>
-
-
-    <script>
-        function init() {
-            myHeader();
-            myFooter();
-            mySidebar();
-
-            getListTemplate()
-
+    <style>
+        .folder {
+            margin-left: 20px;
+            margin-top: 4px;
+            padding: 2px;
+            border: 2px;
+            border-style: solid;
+            border-color: #162eff;
+            border-radius: 10px;
+            cursor: pointer;
         }
 
-    </script>
+        .subfolders {
+            display: none;
+        }
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JPC8DTQSG8"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'G-JPC8DTQSG8');
-    </script>
-
-    <style>
-
+        .ini-file {
+            margin-left: 20px;
+            margin-top: 4px;
+            padding: 2px;
+            border: 2px;
+            border-style: solid;
+            border-color: #162eff;
+            border-radius: 10px;
+            color: blue;
+            cursor: pointer;
+        }
     </style>
+    <title>Folder Tree</title>
 </head>
 
-<body onload="init()">
+<body>
 
-    <div id="notificationHeader">
-        <div id="notificationHeaderText"></div>
-    </div>
-
-    <!-- Yellow ribbon with the inscription -->
-    <div class="ribbon">
-        האתר בתהליך פיתוח
-    </div>
-
-    <div id="myHeader"></div>
-    <div id="sidebar"></div>
-    <div id="banners-container"></div>
-
-    <div id="content">
-        <div class="rounded-container">
-            <h1>עורך ההגדרות</h1>
-            <label for="option">בחר את התבנית או ההגדרה:</label>
-            <select id="templateList" name="option" onchange="getSettingForTemplate()">
-                <option value="none">לא נטענו תבניות</option>
-            </select>
-
-            <button onclick="getListTemplate()">רענן רשימה</button>
-
-            <div id="definitions">
-
-                <h2 id="title_template">שם התבנית שנטענה</h2>
-                <p id="desc_template">תיאור והסבר אודות התבנית וההגדרות הכלליות של התבנית שנבחרה</p>
-
-                <label>הגדרות ברירת המחדל:</label>
-
-                <div id="extini_editor" style="display: flex;">
-                    <textarea id="extini_editor_textarea" dir="ltr">type=menu</textarea>
-                    <div id="autocomplete-list" dir="ltr"></div>
-
-                    <div id="advancedOptions" dir="rtl">
-                        <h2>אפשרויות מתקדמות</h2>
-                        <label>מספר מערכת:</label>
-                        <input id="inputNumber" type="tel"></input>
-                        <label>סיסמה:</label>
-                        <input id="inputPassword" type="password"></input>
-                        <button onclick="showPassword(this, '#inputPassword')">הצג סיסמה</button>
-                        </br>
-                        <label>נתיב שלוחה לייבוא/עדכון:</label>
-                        <input id="inputPath" type="text" placeholder="הזן # לשלוחה הראשית"></input>
-                        <button onclick="getExtSettingsYemot(this)">טען הגדרות</button>
-                        <button onclick="setExtSettingsYemot(this)">עדכן הגדרות בשלוחה</button>
-                        </br>
-                        <label>עדכון מרובה שלוחות, יש להפריד בין שלוחות בפסיק:</label>
-                        </br>
-                        <input id="inputPaths" type="text" placeholder="4, 1/3, 5" style="width: 260px;"></input>
-                        <button onclick="setTextExtsSettingsYemot(this)">עדכן הגדרות בכל השלוחות</button>
-                        <button onclick="setUpdateExtsSettingsYemot(this)">רק הגדרות שהשתנו</button>
-                        <h2>שמירה</h2>
-                        <label>שמור בשם:</label>
-                        <input id="inputFileName" type="text" placeholder="שם קובץ ללא סיומת"></input>
-                        <button onclick="saveIniFile()">שמור הגדרות כקובץ טקסט</button>
-                        <button onclick="saveAsTemplate()">שמור הגדרות כתבנית</button>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div id="myFooter">
-
-      </div>
+    <div id="folderTree"></div>
+    <div id="subfolders"></div>
 
     <script>
-
-        function showPassword(button, element) {
-            var passwordInput = document.querySelector(element);
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                button.textContent = 'הסתר סיסמה'
-            } else {
-                passwordInput.type = 'password';
-                button.textContent = 'הצג סיסמה'
+        async function fetchData(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const myResponse = await response.json();
+                return myResponse;
+            } catch (error) {
+                console.error('Error:', error);
+                throw error;
             }
         }
 
-        function handleEscKey(event) {
-            if (event.key === "Escape" || event.key === "Esc") {
-                const autocompleteList = document.getElementById('autocomplete-list');
-                autocompleteList.style.display = 'none';
-            }
-        }
 
-        document.addEventListener("keydown", handleEscKey);
 
-        document.getElementById('extini_editor_textarea').addEventListener('input', autocompleteYemot);
-
+        (async function () {
+            var folderArray = await createFolderArray();
+            var folderTree = createFolderTree(folderArray, document.getElementById('folderTree'));
+            document.getElementById('folderTree').appendChild(folderTree);
+        })();
     </script>
 
 </body>

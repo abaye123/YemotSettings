@@ -12,7 +12,6 @@
     <link rel="stylesheet" type="text/css" href="css/sidebar.css" />
     <link rel="stylesheet" type="text/css" href="css/footer.css" />
     <link rel="stylesheet" type="text/css" href="css/template_editor.css" />
-    <link rel="stylesheet" type="text/css" href="css/folderTree.css" />
     <script src="js/header.js"></script>
     <script src="js/sidebar.js"></script>
     <script src="js/footer.js"></script>
@@ -47,7 +46,29 @@
     </script>
 
     <style>
+        .folder {
+            margin-left: 20px;
+            margin-top: 4px;
+            padding: 2px;
+            font-size: 20px;
+            background-color: brown;
+            border-radius: 10px;
+            color: rgb(237, 237, 244);
+            cursor: pointer;
+        }
 
+        .subfolders {
+            display: none;
+        }
+
+        .ini-file {
+            margin-left: 20px;
+            margin-top: 4px;
+            padding: 2px;
+            font-size: 18px;
+            color: rgb(237, 237, 244);
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -64,11 +85,11 @@
 
     <div id="myHeader"></div>
     <div id="sidebar">
-        <div id="divFolderTree" style="padding: 14px;">
-            <h2>עץ תיקיות</h2>
-            <div id="folderTree"></div>
-            <div id="subfolders"></div>
-        </div>
+    <div id="divFolderTree" style="padding: 14px;">
+        <h2>עץ תיקיות</h2>
+        <div id="folderTree"></div>
+        <div id="subfolders"></div>
+    </div>
     </div>
     <div id="banners-container"></div>
 
@@ -102,7 +123,7 @@
                         <button onclick="showPassword(this, '#inputPassword')">הצג סיסמה</button>
                         </br>
                         <button onclick="loadsFolderTree()">טען עץ תיקיות</button>
-                        </br>
+                    </br>
                         <label>נתיב שלוחה לייבוא/עדכון:</label>
                         <input id="inputPath" type="text" placeholder="הזן # לשלוחה הראשית"></input>
                         <button onclick="getExtSettingsYemot(this)">טען הגדרות</button>
@@ -130,12 +151,6 @@
 
     <script>
 
-        async function loadsFolderTree() {
-            var folderArray = await createFolderArray();
-            var folderTree = createFolderTree(folderArray, document.getElementById('folderTree'));
-            document.getElementById('folderTree').appendChild(folderTree);
-        }
-
         function showPassword(button, element) {
             var passwordInput = document.querySelector(element);
             if (passwordInput.type === 'password') {
@@ -158,6 +173,11 @@
 
         document.getElementById('extini_editor_textarea').addEventListener('input', autocompleteYemot);
 
+        async function loadsFolderTree() {
+            var folderArray = await createFolderArray();
+            var folderTree = createFolderTree(folderArray, document.getElementById('folderTree'));
+            document.getElementById('folderTree').appendChild(folderTree);
+        }
     </script>
 
 </body>
