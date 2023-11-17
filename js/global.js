@@ -1,3 +1,4 @@
+let pathJsonAbout = `data/about.json`;
 let pathJsonallSettings = `data/allSettingsToExtensionsEditor.json`;
 
 function pathFolders(value) {
@@ -89,9 +90,24 @@ function showBanner(bool, message) {
     setTimeout(() => {
         newBanner.style.display = 'none';
         bannersContainer.removeChild(newBanner);
-    }, 7000);
+    }, 6000);
 
     setTimeout(() => {
         newBanner.style.left = '35px';
     }, 0);
+}
+
+
+async function fetchData(url) {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const myResponse = await response.json();
+        return myResponse;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
 }

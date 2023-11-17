@@ -1,0 +1,15 @@
+footer {
+    padding: 0px;
+    bottom: 2px;
+    text-align: left;
+    font-size: 12px;
+    color: #AAAAAA;
+    left: 22px;
+    width: 80%;
+    position: fixed;
+}
+
+#textFooter4:hover{
+    color: #ffff05;
+    font-size: 14px;
+}

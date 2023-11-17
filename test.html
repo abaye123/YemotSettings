@@ -1,82 +1,151 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="iw" dir="rtl">
+
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Disable Button Example</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>עורך ההגדרות | אביי</title>
+
+    <link rel="stylesheet" type="text/css" href="css/body.css" />
+    <link rel="stylesheet" type="text/css" href="css/header.css" />
+    <link rel="stylesheet" type="text/css" href="css/sidebar.css" />
+    <link rel="stylesheet" type="text/css" href="css/footer.css" />
+    <link rel="stylesheet" type="text/css" href="css/template_editor.css" />
+    <script src="js/header.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/footer.js"></script>
+    <script src="js/global.js"></script>
+
+    <script src="js/load.js"></script>
+    <script src="js/yemot.js"></script>
+    <script src="js/template_editor.js"></script>
+
+
+    <script>
+        function init() {
+            myHeader();
+            myFooter();
+            mySidebar();
+
+            getListTemplate()
+
+        }
+
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JPC8DTQSG8"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-JPC8DTQSG8');
+    </script>
+
+    <style>
+
+    </style>
 </head>
-<style>
-   .banner {
-     position: fixed;
-     padding: 20px;
-     color: #fff;
-     font-size: 18pt;
-     border-radius: 5px;
-     animation: slideIn 1s forwards, growAndShrink 2s 1s 2 forwards;
-     display: none;
-     z-index: 900;
-   }
 
-   @keyframes slideIn {
-     to {
-       left: 35px;
-     }
-   }
+<body onload="init()">
 
-   @keyframes growAndShrink {
-     0% {
-       transform: scale(1);
-     }
+    <div id="notificationHeader">
+        <div id="notificationHeaderText"></div>
+    </div>
 
-     50% {
-       transform: scale(1.2);
-     }
+    <!-- Yellow ribbon with the inscription -->
+    <div class="ribbon">
+        האתר בתהליך פיתוח
+    </div>
 
-     100% {
-       transform: scale(1);
-     }
-   }
-</style>
-<body>
+    <div id="myHeader"></div>
+    <div id="sidebar"></div>
+    <div id="banners-container"></div>
 
-   <div id="banners-container"></div>
-   <button onclick="showBanner(true, 'Message')">Click here</button>
-   <button onclick="showBanner(false, '78ho9dea')">click here</button>
+    <div id="content">
+        <div class="rounded-container">
+            <h1>עורך ההגדרות</h1>
+            <label for="option">בחר את התבנית או ההגדרה:</label>
+            <select id="templateList" name="option" onchange="getSettingForTemplate()">
+                <option value="none">לא נטענו תבניות</option>
+            </select>
 
-   <script>
-     function showBanner(bool, message) {
-       const bannersContainer = document.getElementById('banners-container');
+            <button onclick="getListTemplate()">רענן רשימה</button>
 
-       // Get the height of the existing banners
-       const existingBannersHeight = Array.from(bannersContainer.children)
-         .reduce((totalHeight, banner) => totalHeight + banner.offsetHeight + 10, 0);
+            <div id="definitions">
 
-       // Create a new banner
-       const newBanner = document.createElement('div');
-       newBanner.className = 'banner';
-       newBanner.textContent = message;
-       newBanner.style.color = '#ffffff';
-       newBanner.style.backgroundColor = bool ? 'green' : 'red';
-       newBanner.classList.add('slide-in-animation');
+                <h2 id="title_template">שם התבנית שנטענה</h2>
+                <p id="desc_template">תיאור והסבר אודות התבנית וההגדרות הכלליות של התבנית שנבחרה</p>
 
-       // Append the new banner to the container
-       bannersContainer.appendChild(newBanner);
+                <label>הגדרות ברירת המחדל:</label>
 
-       // Position the new banner below the existing banners
-       newBanner.style.top = `${150 + existingBannersHeight}px`;
-       newBanner.style.left = '-300px';
-       newBanner.style.display = 'block';
+                <div id="extini_editor" style="display: flex;">
+                    <textarea id="extini_editor_textarea" dir="ltr">type=menu</textarea>
+                    <div id="autocomplete-list" dir="ltr"></div>
 
-       setTimeout(() => {
-         newBanner.style.display = 'none';
-         bannersContainer.removeChild(newBanner);
-       }, 7000);
+                    <div id="advancedOptions" dir="rtl">
+                        <h2>אפשרויות מתקדמות</h2>
+                        <label>מספר מערכת:</label>
+                        <input id="inputNumber" type="tel"></input>
+                        <label>סיסמה:</label>
+                        <input id="inputPassword" type="password"></input>
+                        <button onclick="showPassword(this, '#inputPassword')">הצג סיסמה</button>
+                        </br>
+                        <label>נתיב שלוחה לייבוא/עדכון:</label>
+                        <input id="inputPath" type="text" placeholder="הזן # לשלוחה הראשית"></input>
+                        <button onclick="getExtSettingsYemot(this)">טען הגדרות</button>
+                        <button onclick="setExtSettingsYemot(this)">עדכן הגדרות בשלוחה</button>
+                        </br>
+                        <label>עדכון מרובה שלוחות, יש להפריד בין שלוחות בפסיק:</label>
+                        </br>
+                        <input id="inputPaths" type="text" placeholder="4, 1/3, 5" style="width: 260px;"></input>
+                        <button onclick="setTextExtsSettingsYemot(this)">עדכן הגדרות בכל השלוחות</button>
+                        <button onclick="setUpdateExtsSettingsYemot(this)">רק הגדרות שהשתנו</button>
+                        <h2>שמירה</h2>
+                        <label>שמור בשם:</label>
+                        <input id="inputFileName" type="text" placeholder="שם קובץ ללא סיומת"></input>
+                        <button onclick="saveIniFile()">שמור הגדרות כקובץ טקסט</button>
+                        <button onclick="saveAsTemplate()">שמור הגדרות כתבנית</button>
 
-       setTimeout(() => {
-         newBanner.style.left = '35px';
-       }, 0);
-     }
-   </script>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="myFooter">
+
+      </div>
+
+    <script>
+
+        function showPassword(button, element) {
+            var passwordInput = document.querySelector(element);
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                button.textContent = 'הסתר סיסמה'
+            } else {
+                passwordInput.type = 'password';
+                button.textContent = 'הצג סיסמה'
+            }
+        }
+
+        function handleEscKey(event) {
+            if (event.key === "Escape" || event.key === "Esc") {
+                const autocompleteList = document.getElementById('autocomplete-list');
+                autocompleteList.style.display = 'none';
+            }
+        }
+
+        document.addEventListener("keydown", handleEscKey);
+
+        document.getElementById('extini_editor_textarea').addEventListener('input', autocompleteYemot);
+
+    </script>
 
 </body>
+
 </html>

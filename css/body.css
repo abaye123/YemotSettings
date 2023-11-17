@@ -1,122 +1,124 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap');
 
 body {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 
-    font-family: Rubik, sans-serif;
-    background-color: #162eff;
+  font-family: Rubik, sans-serif;
+  background-color: #162eff;
 }
 
 #content {
-    width: 84%;
-    left: 0px;
-    position: absolute;
+  width: 84%;
+  left: 0px;
+  position: absolute;
 }
 
+
+
 .rounded-container {
-    border-radius: 20px;
-    background-color: #f7f5ff;
-    padding: 20px;
-    margin: 20px;
-    padding-right: 40px;
+  border-radius: 20px;
+  background-color: #f7f5ff;
+  padding: 20px;
+  margin: 20px;
+  padding-right: 40px;
 
 }
 
 button {
-    font-family: Rubik, sans-serif;
-    background-color: #162eff;
-    color: #f7f5ff;
-    font-size: 18px;
-    font-weight: 500;
-    margin: 10px;
-    padding: 16px;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    border: 2px;
-    border-style: solid;
-    border-color: #162eff;
-    border-radius: 10px;
+  font-family: Rubik, sans-serif;
+  background-color: #162eff;
+  color: #f7f5ff;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 10px;
+  padding: 16px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border: 2px;
+  border-style: solid;
+  border-color: #162eff;
+  border-radius: 10px;
 }
 
 button:hover {
-    background-color: yellow;
-    color: #162eff;
-    border-color: #162eff;
+  background-color: yellow;
+  color: #162eff;
+  border-color: #162eff;
 }
 
 input {
-    font-family: Rubik, sans-serif;
-    background-color: #f7f5ff;
-    color: #162eff;
-    font-size: 18px;
-    font-weight: 500;
-    margin: 10px;
-    margin-right: 2px;
-    padding: 16px;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    border: 2px;
-    border-style: solid;
-    border-color: #162eff;
-    border-radius: 8px;
-    width: 150px;
+  font-family: Rubik, sans-serif;
+  background-color: #f7f5ff;
+  color: #162eff;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 10px;
+  margin-right: 2px;
+  padding: 16px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border: 2px;
+  border-style: solid;
+  border-color: #162eff;
+  border-radius: 8px;
+  width: 150px;
 }
 
 label {
-    font-family: Rubik, sans-serif;
-    background-color: #f7f5ff;
-    color: #162eff;
-    font-size: 20px;
-    font-weight: 500;
-    padding-top: 4px;
-    padding-bottom: 4px;
+  font-family: Rubik, sans-serif;
+  background-color: #f7f5ff;
+  color: #162eff;
+  font-size: 20px;
+  font-weight: 500;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
 select {
-    font-family: Rubik, sans-serif;
-    background-color: #f7f5ff;
-    color: #162eff;
-    font-size: 18px;
-    font-weight: 500;
-    margin: 10px;
-    margin-right: 2px;
-    padding: 16px;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    border: 2px;
-    border-style: solid;
-    border-color: #162eff;
-    border-radius: 8px;
+  font-family: Rubik, sans-serif;
+  background-color: #f7f5ff;
+  color: #162eff;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 10px;
+  margin-right: 2px;
+  padding: 16px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border: 2px;
+  border-style: solid;
+  border-color: #162eff;
+  border-radius: 8px;
 }
 
 .banner {
-    position: fixed;
-    padding: 20px;
-    color: #fff;
-    font-size: 18pt;
-    border-radius: 5px;
-    animation: slideIn 1s forwards, growAndShrink 2s 1s 2 forwards;
-    display: none;
-    z-index: 900;
+  position: fixed;
+  padding: 20px;
+  color: #fff;
+  font-size: 18pt;
+  border-radius: 5px;
+  animation: slideIn 1s forwards, growAndShrink 2s 1s 2 forwards;
+  display: none;
+  z-index: 900;
+}
+
+@keyframes slideIn {
+  to {
+    left: 35px;
+  }
+}
+
+@keyframes growAndShrink {
+  0% {
+    transform: scale(1);
   }
 
-  @keyframes slideIn {
-    to {
-      left: 35px;
-    }
+  50% {
+    transform: scale(1.2);
   }
 
-  @keyframes growAndShrink {
-    0% {
-      transform: scale(1);
-    }
-
-    50% {
-      transform: scale(1.2);
-    }
-
-    100% {
-      transform: scale(1);
-    }
+  100% {
+    transform: scale(1);
   }
+}

@@ -88,6 +88,7 @@ header ul li a:hover {
     border-radius: 10px;
     z-index: 898;
     white-space: nowrap;
+    display: none;
   }
 
 #notificationHeaderText {

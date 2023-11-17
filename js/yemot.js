@@ -52,7 +52,7 @@ async function uploadTextToFile(token, path, text) {
             body: JSON.stringify(payload),
         });
 
-        let req = await response.json(); // Assuming the response is in JSON format
+        let req = await response.json();
         writeLog("response: " + JSON.stringify(req));
 
         if (req.responseStatus === 'OK') {
