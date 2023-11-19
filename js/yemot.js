@@ -12,7 +12,7 @@ async function login(user, password) {
         writeLog("token: " + req.token);
         return req.token;
     } else {
-        return false;
+        return [false, req.message];
     }
 }
 
@@ -76,6 +76,20 @@ async function updateExtensionSettings(token, path, settings) {
     writeLog(req.responseStatus);
     if (req.responseStatus == 'OK') {
         return true;
+    } else {
+        return false;
+    }
+}
+
+
+async function getSession(token) {
+    let response = await fetch(`${urlYemotApi}GetSession?token=${token}`);
+    var req = await response.text();
+    writeLog("response: " + req);
+    req = JSON.parse(req);
+    writeLog(req.responseStatus);
+    if (req.responseStatus == 'OK') {
+        return req;
     } else {
         return false;
     }

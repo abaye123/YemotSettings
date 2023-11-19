@@ -1,69 +1,183 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="iw" dir="rtl">
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>עורך ההגדרות | אביי</title>
+
     <style>
-        .folder {
-            margin-left: 20px;
-            margin-top: 4px;
-            padding: 2px;
-            border: 2px;
-            border-style: solid;
-            border-color: #162eff;
-            border-radius: 10px;
-            cursor: pointer;
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
         }
 
-        .subfolders {
+        #divBloked {
+            /* כיסוי על כל התוכן חוץ מmyHeader, login, ו-myFooter */
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
             display: none;
+            /* התחלתית לא נראה */
         }
 
-        .ini-file {
-            margin-left: 20px;
-            margin-top: 4px;
-            padding: 2px;
-            border: 2px;
-            border-style: solid;
-            border-color: #162eff;
+        #notificationHeader {
+            /* באנר התראות מעל myHeader */
+            background-color: #f00;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            display: none;
+            /* התחלתית לא נראה */
+        }
+
+        #myHeader {
+            /* כותרת הדף שתמיד תופיע למעלה */
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        #login {
+            /* באנר login במרכז הדף */
+            background-color: #ff0;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            /* התחלתית לא נראה */
+        }
+
+        #sidebar {
+            /* סרגל צידי מימין הדף */
+            width: 200px;
+            background-color: #ddd;
+            position: fixed;
+            top: 60px;
+            /* גובה myHeader + מרווח מתחתיו */
+            bottom: 0;
+            right: 0;
+            overflow-y: auto;
+        }
+
+        #content {
+            /* תוכן הדף */
+            margin-top: 60px;
+            /* גובה myHeader + מרווח מתחתיו */
+            margin-right: 200px;
+            /* רוחב sidebar */
+            padding: 20px;
+        }
+
+        .rounded-container {
+            /* תיקולים נוספים על הפריסה */
+            background-color: #fff;
             border-radius: 10px;
-            color: blue;
-            cursor: pointer;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #definitions {
+            /* חלוקה של definitions לשניים */
+            display: flex;
+            flex-direction: column;
+        }
+
+        #extini_editor {
+            /* סגנון של extini_editor */
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+        }
+
+        #advancedOptions {
+            /* אפשרויות מתקדמות */
+            margin-top: 20px;
+        }
+
+        #myFooter {
+            /* תחתית הדף */
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            text-align: center;
         }
     </style>
-    <title>Folder Tree</title>
 </head>
 
 <body>
 
-    <div id="folderTree"></div>
-    <div id="subfolders"></div>
+    <div id="divBloked"></div>
+
+    <div id="notificationHeader">
+        <div id="notificationHeaderText">התראה זמנית</div>
+    </div>
+
+    <div id="myHeader">כותרת הדף
+
+    </div>
+
+    <div class="login" id="login">באנר login</div>
+
+    <div id="sidebar">סרגל צידי</div>
+
+    <div id="content">
+        <div class="rounded-container">
+            <h1>עורך ההגדרות</h1>
+            <label for="option">בחר את התבנית או ההגדרה:</label>
+            <select id="templateList" name="option" onchange="getSettingForTemplate()">
+                <option value="none">לא נטענו תבניות</option>
+            </select>
+
+            <button title="מרענן את רשימת התבניות הזמינות" onclick="getListTemplate()">רענן רשימה</button>
+
+            <div id="definitions">
+
+                <h2 id="title_template">לא נבחרה תבנית</h2>
+                <p id="desc_template">תיאור והסבר אודות התבנית וההגדרות הכלליות של התבנית שנבחרה</p>
+
+                <select id="selectFilesList">
+                    <option value="none">לא נטענו קבצים</option>
+                </select>
+                <label>הגדרות ברירת המחדל:</label>
+
+                <div id="extini_editor">
+                    <textarea id="extini_editor_textarea" dir="ltr">type=menu</textarea>
+                    <div id="autocomplete-list" dir="ltr"></div>
+
+                    <div id="advancedOptions">
+                        <h2>אפשרויות מתקדמות</h2>
+                        <!-- תוכן אפשרויות מתקדמות -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="myFooter">כותרת תחתית לדף</div>
 
     <script>
-        async function fetchData(url) {
-            try {
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                const myResponse = await response.json();
-                return myResponse;
-            } catch (error) {
-                console.error('Error:', error);
-                throw error;
-            }
-        }
 
 
-
-        (async function () {
-            var folderArray = await createFolderArray();
-            var folderTree = createFolderTree(folderArray, document.getElementById('folderTree'));
-            document.getElementById('folderTree').appendChild(folderTree);
-        })();
     </script>
-
 </body>
 
 </html>

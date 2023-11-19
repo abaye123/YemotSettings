@@ -1,5 +1,9 @@
 #sidebar {
+    /* סרגל צידי מימין הדף */
     width: 16%;
     position: fixed;
-    height: 100%;
+    top: 120px; /* גובה myHeader + מרווח מתחתיו */
+    bottom: 0;
+    right: 0;
+    overflow-y: auto;
 }

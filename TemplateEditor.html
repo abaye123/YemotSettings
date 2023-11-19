@@ -30,8 +30,8 @@
             myFooter();
             mySidebar();
 
-            getListTemplate()
-
+            getListTemplate();
+            openLogin();
         }
 
     </script>
@@ -53,6 +53,8 @@
 
 <body onload="init()">
 
+    <div id="divBloked"></div>
+
     <div id="notificationHeader">
         <div id="notificationHeaderText"></div>
     </div>
@@ -63,9 +65,31 @@
     </div>
 
     <div id="myHeader"></div>
+
+    <div class="login" id="login">
+        <div class="login-content">
+            <span class="close" onclick="closeLogin()">&times;</span>
+            <h2>התחברות למערכת</h2>
+            <form action="#">
+                <label>מספר המערכת:</label>
+                <input type="text" id="userNumber">
+                </br>
+                <label>סיסמה:</label>
+                <input type="text" id="userPassword">
+                </br></br>
+                <button type="button" onclick="closeLogin()">המשך ללא התחברות</button>
+                <button type="button" onclick="loginYemot(this)">התחברות למערכת</button>
+                <h3 id="loginMessengeMode"></h3>
+            </form>
+        </div>
+    </div>
+
     <div id="sidebar">
         <div id="divFolderTree" style="padding: 14px;">
             <h2>עץ תיקיות</h2>
+            <button id="buttonLoadTree" title="טוען את עץ התיקיות של המערכת בסרגל השמאלי"
+                onclick="loadsFolderTree()">טען עץ
+                תיקיות</button>
             <div id="folderTree"></div>
             <div id="subfolders"></div>
         </div>
@@ -80,13 +104,17 @@
                 <option value="none">לא נטענו תבניות</option>
             </select>
 
-            <button onclick="getListTemplate()">רענן רשימה</button>
+            <button title="מרענן את רשימת התבניות הזמינות" onclick="getListTemplate()">רענן רשימה</button>
+            <button title="מרענן את רשימת התבניות הזמינות" onclick="autocomplete4444()">רענן</button>
 
             <div id="definitions">
 
-                <h2 id="title_template">שם התבנית שנטענה</h2>
+                <h2 id="title_template">לא נבחרה תבנית</h2>
                 <p id="desc_template">תיאור והסבר אודות התבנית וההגדרות הכלליות של התבנית שנבחרה</p>
 
+                <select id="selectFilesList" onchange="importIniContent()">
+                    <option value="none">לא נטענו קבצים</option>
+                </select>
                 <label>הגדרות ברירת המחדל:</label>
 
                 <div id="extini_editor" style="display: flex;">
@@ -95,24 +123,34 @@
 
                     <div id="advancedOptions" dir="rtl">
                         <h2>אפשרויות מתקדמות</h2>
+                        <!-- 
                         <label>מספר מערכת:</label>
                         <input id="inputNumber" type="tel"></input>
                         <label>סיסמה:</label>
                         <input id="inputPassword" type="password"></input>
-                        <button onclick="showPassword(this, '#inputPassword')">הצג סיסמה</button>
+                        <button title="הצג והסתר את סיסמת המערכת" onclick="showPassword(this, '#inputPassword')">הצג
+                            סיסמה</button>
                         </br>
-                        <button onclick="loadsFolderTree()">טען עץ תיקיות</button>
+                        
+                        <button title="טוען את עץ התיקיות של המערכת בסרגל השמאלי" onclick="loadsFolderTree()">טען עץ
+                            תיקיות</button>
                         </br>
+                        -->
                         <label>נתיב שלוחה לייבוא/עדכון:</label>
-                        <input id="inputPath" type="text" placeholder="הזן # לשלוחה הראשית"></input>
-                        <button onclick="getExtSettingsYemot(this)">טען הגדרות</button>
-                        <button onclick="setExtSettingsYemot(this)">עדכן הגדרות בשלוחה</button>
+                        <input id="inputPath" type="text" placeholder="הזן # לשלוחה הראשית" dir="ltr"></input>
+                        <button title="טוען את ההגדרות הקיימות מהשלוחה לעורך" onclick="getExtSettingsYemot(this)">טען
+                            הגדרות</button>
+                        <button title="מעדכן את ההגדרות מהעורך לשלוחה במערכת הטלפונית"
+                            onclick="setExtSettingsYemot(this)">עדכן הגדרות בשלוחה</button>
                         </br>
                         <label>עדכון מרובה שלוחות, יש להפריד בין שלוחות בפסיק:</label>
                         </br>
                         <input id="inputPaths" type="text" placeholder="4, 1/3, 5" style="width: 260px;"></input>
-                        <button onclick="setTextExtsSettingsYemot(this)">עדכן הגדרות בכל השלוחות</button>
-                        <button onclick="setUpdateExtsSettingsYemot(this)">רק הגדרות שהשתנו</button>
+                        <button title="מעדכן את ההגדרות בכל השלוחות  שהוזנו, יש להפריד בין שלוחה לשלוחה עם פסיק ורווח"
+                            onclick="setTextExtsSettingsYemot(this)">עדכן הגדרות בכל השלוחות</button>
+                        <button
+                            title="מעדכן רק את ההגדרות שהשתנו בשלוחה, הגדרות שכבר קיימות בשלוחה ולא קיימות בעורך, לא ישתנו"
+                            onclick="setUpdateExtsSettingsYemot(this)">רק הגדרות שהשתנו</button>
                         <h2>שמירה</h2>
                         <label>שמור בשם:</label>
                         <input id="inputFileName" type="text" placeholder="שם קובץ ללא סיומת"></input>
@@ -131,9 +169,13 @@
     <script>
 
         async function loadsFolderTree() {
+            document.getElementById('folderTree').innerHTML = '';
+            let button = document.getElementById('buttonLoadTree');
+            clickStart(button);
             var folderArray = await createFolderArray();
             var folderTree = createFolderTree(folderArray, document.getElementById('folderTree'));
             document.getElementById('folderTree').appendChild(folderTree);
+            clickStop(button);
         }
 
         function showPassword(button, element) {

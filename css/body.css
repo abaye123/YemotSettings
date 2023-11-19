@@ -8,22 +8,76 @@ body {
   background-color: #162eff;
 }
 
-#content {
-  width: 84%;
-  left: 0px;
-  position: absolute;
+
+#divBloked {
+  display: block;
+  background-color: #162eff;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 989;
 }
 
 
+.login {
+  display: none;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f1f1f1;
+  padding: 50px;
+  width: 480px;
+  height: 280px;
+  border: 3px solid #162eff;
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px 0px #162eff;
+  z-index: 990;
+}
+
+
+.login-content {
+  text-align: center;
+}
+
+.login-content label {
+  background-color: #f1f1f1;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* #content {
+  top: 110px;
+  
+  left: 0px;
+  position: absolute;
+} */
+
+#content {
+  /* תוכן הדף */
+  margin-top: 130px; /* גובה myHeader + מרווח מתחתיו */
+  margin-right: 16%; /* רוחב sidebar */
+  padding: 20px;
+}
 
 .rounded-container {
   border-radius: 20px;
   background-color: #f7f5ff;
   padding: 20px;
-  margin: 20px;
   padding-right: 40px;
 
 }
+
 
 button {
   font-family: Rubik, sans-serif;
@@ -100,12 +154,13 @@ select {
   border-radius: 5px;
   animation: slideIn 1s forwards, growAndShrink 2s 1s 2 forwards;
   display: none;
-  z-index: 900;
+  left: 0px;
+  z-index: 992;
 }
 
 @keyframes slideIn {
   to {
-    left: 35px;
+    left: 40px;
   }
 }
 

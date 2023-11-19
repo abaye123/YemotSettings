@@ -17,7 +17,7 @@ function myHeader() {
     const menuItems = [
         { href: '/YemotSettings/', text: 'דשבורד ראשי' },
         { href: '#services', text: 'ניהול תבניות' },
-        { href: '/YemotSettings/TemplateEditor.html', text: 'יצירת תבנית' },
+        { href: '/YemotSettings/TemplateEditor.html', text: 'עורך ההגדרות' },
         { href: '/YemotSettings/BuildingSystem.html', text: 'אפיון מערכת' },
         { href: '/YemotSettings', text: 'הגדרות' },
         { href: '#contact', text: 'צור קשר' }
@@ -45,4 +45,21 @@ function myHeader() {
     //const mynotificationHeaderDiv = document.getElementById('notificationHeaderText');
     //mynotificationHeaderDiv.textContent = "האתר עדיין בפיתוח... 🔨 כפתורי העדכון מרובה השלוחות ושמירת ההגדרות לתבנית עדיין אינם פעילים. ליצירת קשר, הערות והארות ניתן לשלוח מייל לcs@abaye.co";
     //mynotificationHeaderDiv.style.display = 'block';
+
+    // Create the img element
+    var imgElement = document.createElement('img');
+    imgElement.id = 'bthLogin';
+    imgElement.src = 'img/look.png';
+    imgElement.onclick = openLogin;
+
+    var divStatusLogin = document.createElement('div');
+    divStatusLogin.id = 'divStatusLogin';
+    divStatusLogin.textContent = 'התחברות';
+    divStatusLogin.onclick = openLogin;
+    divStatusLogin.style.cursor = 'pointer';
+
+    const titleHeaderDiv = document.getElementById('titleHeader');
+    // Append the img element to the myHeader element
+    titleHeaderDiv.appendChild(imgElement);
+    titleHeaderDiv.appendChild(divStatusLogin);
 }

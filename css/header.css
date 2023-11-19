@@ -1,12 +1,14 @@
-header {
+#myHeader {
+    /* כותרת הדף שתמיד תופיע למעלה */
     background-color: #162eff;
     color: #ffffff;
     padding: 20px;
+    position: fixed;
     top: 0;
-    left: 0;
     right: 0;
-    z-index: 1;
-    height: 80px;
+    left: 0;
+    z-index: 990;
+    height: 100px;
 }
 
 header #bsd {
@@ -15,7 +17,6 @@ header #bsd {
     font-weight: 400;
     text-decoration: none;
     top: 0px;
-
     padding: 0px;
     position: fixed;
 }
@@ -89,29 +90,46 @@ header ul li a:hover {
     z-index: 898;
     white-space: nowrap;
     display: none;
-  }
+}
+
 
 #notificationHeaderText {
     white-space: nowrap;
     animation: scrollText 18s linear infinite;
 }
 
-  @keyframes scrollText {
+@keyframes scrollText {
     0% {
-      transform: translateX(-15%); /* Start position from the right */
+        transform: translateX(-15%);
+        /* Start position from the right */
     }
+
     100% {
-      transform: translateX(30%); /* End position to the left */
+        transform: translateX(30%);
+        /* End position to the left */
     }
-  }
+}
 
 
+#bthLogin {
+    width: 30px;
+    left: 70px;
+    top: 70px;
+    position: fixed;
+}
+
+#divStatusLogin {
+    font-size: 16pt;
+    left: 110px;
+    top: 70px;
+    position: fixed;
+}
 
 /* Styles for the yellow ribbon */
 .ribbon {
     position: fixed;
-    top: 250px;
-    left: -30pt;
+    top: -50px;
+    right: -130pt;
     width: 400px;
     text-align: center;
     font-size: 24pt;
@@ -119,7 +137,10 @@ header ul li a:hover {
     padding: 10px;
     color: black;
     font-weight: bold;
-    transform: rotate(-45deg); /* Rotate the ribbon by -45 degrees */
-    transform-origin: 0 0; /* Set the rotation origin to the top left corner */
-    z-index: 899; /* Ensure the ribbon is on top of other elements */
-  }
+    transform: rotate(45deg);
+    /* Rotate the ribbon by -45 degrees */
+    transform-origin: 0 0;
+    /* Set the rotation origin to the top left corner */
+    z-index: 991;
+    /* Ensure the ribbon is on top of other elements */
+}

@@ -1,6 +1,55 @@
 let pathJsonAbout = `data/about.json`;
 let pathJsonallSettings = `data/allSettingsToExtensionsEditor.json`;
 
+var userGlobal;
+var passGlobal;
+var tokenGlobal;
+
+
+function openLogin() {
+    document.getElementById('login').style.display = 'block';
+}
+
+function closeLogin() {
+    document.getElementById('login').style.display = 'none';
+    document.getElementById('divBloked').style.display = 'none';
+}
+
+async function loginYemot(button) {
+    clickStart(button);
+    userGlobal = document.getElementById('userNumber').value;
+    passGlobal = document.getElementById('userPassword').value;
+    var loginyemot = [];
+    loginyemot = await login(userGlobal, passGlobal);
+    if (loginyemot[0] != false) {
+        document.querySelector('#loginMessengeMode').innerHTML = 'התחברתם בהצלחה!';
+        tokenGlobal = await loginyemot;
+        runSession();
+        loadsFolderTree();
+        closeLogin();
+    } else {
+        document.querySelector('#loginMessengeMode').innerHTML = 'שגיאה בהתחברות, נסו שנית ' + loginyemot[1];
+    }
+    clickStop(button);
+}
+
+
+async function runSession() {
+    let content = await getSession(tokenGlobal);
+    if (content != false) {
+        console.log('content');
+        console.log(content);
+        
+       // let session = JSON.parse(content)
+        document.querySelector('#divStatusLogin').innerHTML = ' מחובר כ' + content.username
+    } else {
+        document.querySelector('#divStatusLogin').innerHTML = 'התחברות'
+    }
+}
+
+//setInterval(runSession, 60000);
+
+
 function pathFolders(value) {
     const pathMappings = {
         "ימות": 'data/AllSettingsYemot',
@@ -23,20 +72,20 @@ function pathFiles(value) {
 }
 
 function clickStart(button) {
-    console.log(button)
     button.style.backgroundColor = 'orange';
     button.style.borderColor = 'orange';
 }
 
 function clickStop(button) {
+   /*
     button.style.backgroundColor = '';
     button.style.borderColor = '';
-    /*
-    setTimeout(function () {
-        button.style.backgroundColor = '';
-        button.style.borderColor = '';
-    }, 1500);
     */
+    setTimeout(function () {
+    button.style.backgroundColor = '';
+    button.style.borderColor = '';
+    }, 500);
+    
 }
 
 function showStatusIndicator(button, success) {
@@ -93,7 +142,7 @@ function showBanner(bool, message) {
     }, 6000);
 
     setTimeout(() => {
-        newBanner.style.left = '35px';
+        newBanner.style.left = '-10px';
     }, 0);
 }
 
